@@ -167,6 +167,131 @@ function changeImagesByCategory(category) {
   }
 }
 
-function script(){
-  // 여기에 다른 스크립트 명령어를 작성하세요
-};
+// 이벤트 바로가기 버튼 마우스 따라다니기 기능
+document.addEventListener('DOMContentLoaded', function() {
+  const eventCont = document.querySelector('.event_cont');
+  const shortcutBtn = document.querySelector('.event_shortcut_btn');
+  
+  if (eventCont && shortcutBtn) {
+    let isHovering = false;
+    
+    // 마우스가 event_cont 영역에 들어올 때
+    eventCont.addEventListener('mouseenter', function() {
+      isHovering = true;
+      shortcutBtn.classList.add('show');
+    });
+    
+    // 마우스가 event_cont 영역을 벗어날 때
+    eventCont.addEventListener('mouseleave', function() {
+      isHovering = false;
+      shortcutBtn.classList.remove('show');
+    });
+    
+    // 마우스 움직임 감지
+    eventCont.addEventListener('mousemove', function(e) {
+      if (isHovering) {
+        // 마우스 위치 계산
+        const rect = eventCont.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        
+        // 버튼 위치 업데이트 (마우스 커서 정중앙에 위치)
+        const btnRect = shortcutBtn.getBoundingClientRect();
+        const offsetX = -btnRect.width / 2; // 버튼 너비의 절반만큼 왼쪽으로
+        const offsetY = -btnRect.height / 2; // 버튼 높이의 절반만큼 위로
+        
+        const newX = mouseX + offsetX;
+        const newY = mouseY + offsetY;
+        
+        // 화면 경계 체크
+        const maxX = rect.width - btnRect.width - 10;
+        const maxY = rect.height - btnRect.height - 10;
+        
+        const finalX = Math.max(10, Math.min(newX, maxX));
+        const finalY = Math.max(10, Math.min(newY, maxY));
+        
+        // 버튼 위치 설정
+        shortcutBtn.style.left = finalX + 'px';
+        shortcutBtn.style.top = finalY + 'px';
+        shortcutBtn.style.transform = 'none'; // 기존 transform 제거
+      }
+    });
+    
+    // 버튼 클릭 이벤트
+    shortcutBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      // 여기에 이벤트 페이지로 이동하는 로직 추가
+      alert('이벤트 페이지로 이동합니다!');
+      // 예: window.location.href = '/event-page';
+    });
+  }
+});
+
+// Swiper 슬라이더 초기화
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('Swiper 초기화 시작');
+  
+  // Swiper 요소가 존재하는지 확인
+  const swiperElement = document.querySelector('.review_swiper');
+  if (!swiperElement) {
+    console.error('Swiper 요소를 찾을 수 없습니다');
+    return;
+  }
+  
+  // Swiper CDN이 로드되었는지 확인
+  if (typeof Swiper === 'undefined') {
+    console.error('Swiper 라이브러리가 로드되지 않았습니다');
+    return;
+  }
+  
+  try {
+    const reviewSwiper = new Swiper('.review_swiper', {
+      slidesPerView: 1,
+      spaceBetween: 125,
+      centeredSlides: true,
+      loop: true,
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+        type: 'bullets',
+        renderBullet: function (index, className) {
+          return '<span class="' + className + '"></span>';
+        },
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      
+    });
+    
+    console.log('Swiper 초기화 완료');
+    
+    // Swiper 인스턴스 확인
+    if (reviewSwiper) {
+             console.log('Swiper 인스턴스 생성됨');
+       console.log('페이지네이션 요소:', reviewSwiper.pagination.el);
+      
+             // 페이지네이션 표시
+       setTimeout(() => {
+         const pagination = document.querySelector('.swiper-pagination');
+         
+         if (pagination) {
+           pagination.style.display = 'block';
+           pagination.style.opacity = '1';
+           pagination.style.visibility = 'visible';
+           console.log('페이지네이션 스타일 적용됨');
+         }
+       }, 300);
+      
+      
+    }    
+  } catch (error) {
+    console.error('Swiper 초기화 오류:', error);
+  }
+});
+

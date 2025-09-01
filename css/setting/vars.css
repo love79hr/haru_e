@@ -9,7 +9,7 @@
 
   /* 색상 지정 */
   --main-color: #4B3B38;
-  --point-color: #CC9999;
+  --point-color: rgb(204, 153, 153);
   --sub1-color: #E5B6A0;
   --sub2-color: #F2D6C9;
   --bg-color: #F9F4F1;
