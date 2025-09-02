@@ -27,6 +27,37 @@ window.addEventListener('scroll', function() {
   }
 });
 
+// 로그인 팝업창 요소들
+const loginBtn = document.querySelector('.login_btn');
+const loginPopup = document.querySelector('.login_popup');
+const loginCloseBtn = loginPopup?.querySelector('.close_btn');
+
+// 로그인 팝업창 열기
+if (loginBtn) {
+  loginBtn.addEventListener('click', function() {
+    loginPopup.classList.add('active');
+    document.body.style.overflow = 'hidden'; // 스크롤 방지
+  });
+}
+
+// 로그인 팝업창 닫기
+if (loginCloseBtn) {
+  loginCloseBtn.addEventListener('click', function() {
+    loginPopup.classList.remove('active');
+    document.body.style.overflow = ''; // 스크롤 복원
+  });
+}
+
+// 로그인 팝업창 외부 클릭 시 닫기
+if (loginPopup) {
+  loginPopup.addEventListener('click', function(e) {
+    if (e.target === loginPopup) {
+      loginPopup.classList.remove('active');
+      document.body.style.overflow = ''; // 스크롤 복원
+    }
+  });
+}
+
 // 카테고리별 이미지 데이터
 const categoryImages = {
   '조명 / 캔들': [
@@ -394,3 +425,172 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+
+// 장바구니 팝업창 요소들
+const cartBtn = document.querySelector('.cart_btn');
+const cartPopup = document.querySelector('.cart_popup');
+const cartCloseBtn = cartPopup?.querySelector('.close_btn');
+
+// 장바구니 팝업창 열기
+if (cartBtn) {
+  cartBtn.addEventListener('click', function() {
+    cartPopup.classList.add('active');
+    document.body.style.overflow = 'hidden'; // 스크롤 방지
+  });
+}
+
+// 장바구니 팝업창 닫기
+if (cartCloseBtn) {
+  cartCloseBtn.addEventListener('click', function() {
+    cartPopup.classList.remove('active');
+    document.body.style.overflow = ''; // 스크롤 복원
+  });
+}
+
+// 장바구니 팝업창 외부 클릭 시 닫기
+if (cartPopup) {
+  cartPopup.addEventListener('click', function(e) {
+    if (e.target === cartPopup) {
+      cartPopup.classList.remove('active');
+      document.body.style.overflow = ''; // 스크롤 복원
+    }
+  });
+}
+
+// ========================================
+// 장바구니 상품 관리 기능 구현
+// ========================================
+
+// 장바구니 수량 조절 및 상품 관리 기능
+document.addEventListener('DOMContentLoaded', function() {
+  // 장바구니 내부 기능 관련 DOM 요소들을 선택
+  const qtyBtns = document.querySelectorAll('.qty_btn');           // 수량 증가/감소 버튼들
+  const removeBtns = document.querySelectorAll('.remove_btn');    // 상품 삭제 버튼들
+  const cartClearBtn = document.querySelector('.cart_clear');     // 장바구니 비우기 버튼
+  const cartCheckoutBtn = document.querySelector('.cart_checkout'); // 주문하기 버튼
+  
+  // ========================================
+  // 수량 조절 기능 (증가/감소)
+  // ========================================
+  qtyBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // 현재 상품의 수량 표시 요소를 찾기
+      const quantitySpan = this.parentNode.querySelector('.quantity');
+      let quantity = parseInt(quantitySpan.textContent);
+      
+      // 버튼 클래스에 따라 수량 증가 또는 감소
+      if (this.classList.contains('plus')) {
+        quantity++; // 수량 증가
+      } else if (this.classList.contains('minus') && quantity > 1) {
+        quantity--; // 수량 감소 (최소 1개 유지)
+      }
+      
+      // 수량 업데이트 및 총계 재계산
+      quantitySpan.textContent = quantity;
+      updateCartSummary(); // 장바구니 요약 정보 업데이트
+    });
+  });
+  
+  // ========================================
+  // 개별 상품 삭제 기능
+  // ========================================
+  removeBtns.forEach(btn => {
+    btn.addEventListener('click', function() {
+      // 클릭된 삭제 버튼이 속한 상품 아이템을 찾기
+      const cartItem = this.closest('.cart_item');
+      cartItem.remove(); // 상품 아이템을 DOM에서 제거
+      
+      // 장바구니 상태 업데이트
+      updateCartSummary(); // 총계 재계산
+      checkEmptyCart();    // 빈 장바구니 상태 체크
+    });
+  });
+  
+  // ========================================
+  // 장바구니 전체 비우기 기능
+  // ========================================
+  if (cartClearBtn) {
+    cartClearBtn.addEventListener('click', function() {
+      // 모든 상품 아이템을 찾아서 제거
+      const cartItems = document.querySelectorAll('.cart_item');
+      cartItems.forEach(item => item.remove());
+      
+      // 장바구니 상태 업데이트
+      updateCartSummary(); // 총계 재계산
+      checkEmptyCart();    // 빈 장바구니 상태 체크
+    });
+  }
+  
+  // ========================================
+  // 주문하기 기능
+  // ========================================
+  if (cartCheckoutBtn) {
+    cartCheckoutBtn.addEventListener('click', function() {
+      alert('주문 페이지로 이동합니다.');
+      // TODO: 여기에 실제 주문 페이지 이동 로직 추가
+      // 예: window.location.href = '/checkout';
+    });
+  }
+  
+  // ========================================
+  // 장바구니 요약 정보 업데이트 함수
+  // ========================================
+  function updateCartSummary() {
+    // 모든 상품의 수량을 가져와서 총 상품수 계산
+    const quantities = document.querySelectorAll('.quantity');
+    const totalItems = Array.from(quantities).reduce((sum, qty) => sum + parseInt(qty.textContent), 0);
+    
+    // 총 상품수 표시 업데이트
+    const totalInfo = document.querySelectorAll('.total_info strong');
+    if (totalInfo[0]) totalInfo[0].textContent = totalItems + '개';
+    
+    // ========================================
+    // 총 금액 계산 로직
+    // ========================================
+    let totalPrice = 0;
+    const cartItems = document.querySelectorAll('.cart_item');
+    
+    cartItems.forEach(item => {
+      // 상품 가격에서 숫자만 추출 (원, 쉼표 등 제거)
+      const priceText = item.querySelector('.item_price').textContent;
+      const price = parseInt(priceText.replace(/[^0-9]/g, ''));
+      
+      // 상품 수량 가져오기
+      const quantity = parseInt(item.querySelector('.quantity').textContent);
+      
+      // 상품별 총액 = 가격 × 수량
+      totalPrice += price * quantity;
+    });
+    
+    // 총 금액 표시 업데이트 (천 단위 쉼표 포함)
+    if (totalInfo[1]) totalInfo[1].textContent = totalPrice.toLocaleString() + '원';
+  }
+  
+  // ========================================
+  // 빈 장바구니 상태 체크 및 UI 업데이트 함수
+  // ========================================
+  function checkEmptyCart() {
+    // 장바구니 관련 UI 요소들을 선택
+    const cartItems = document.querySelector('.cart_items');      // 상품 목록 영역
+    const cartEmpty = document.querySelector('.cart_empty');     // 빈 장바구니 메시지
+    const cartSummary = document.querySelector('.cart_summary'); // 총계 정보 영역
+    const cartActions = document.querySelector('.cart_actions'); // 액션 버튼 영역
+    
+    // 상품이 없는 경우
+    if (cartItems.children.length === 0) {
+      cartEmpty.style.display = 'block';      // 빈 장바구니 메시지 표시
+      cartSummary.style.display = 'none';     // 총계 정보 숨김
+      cartActions.style.display = 'none';     // 액션 버튼 숨김
+    } else {
+      // 상품이 있는 경우
+      cartEmpty.style.display = 'none';       // 빈 장바구니 메시지 숨김
+      cartSummary.style.display = 'block';    // 총계 정보 표시
+      cartActions.style.display = 'flex';     // 액션 버튼 표시
+    }
+  }
+  
+  // ========================================
+  // 초기 상태 설정
+  // ========================================
+  checkEmptyCart(); // 페이지 로드 시 장바구니 상태 체크
+});

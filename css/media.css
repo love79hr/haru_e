@@ -7,9 +7,35 @@
 }
 
 /* top 영역 */
-
-/* header 영역*/
 @media (max-width: 768px) {
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  #top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 100;
+  }
+  
+  #header {
+    position: fixed;
+    top: clamp(20px, 2.1vw, 40px);
+    left: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 100;
+  }
+  
+  #main {
+    padding-top: clamp(80px, 12vw, 165px);
+  }
+
   .nav .bar_menu .sub_menu {
     width: 150px;
   }
@@ -46,6 +72,34 @@
 }
 
 @media (max-width: 480px) {
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  #top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 100;
+  }
+  
+  #header {
+    position: fixed;
+    top: clamp(20px, 2.1vw, 40px);
+    left: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 100;
+  }
+  
+  #main {
+    padding-top: clamp(80px, 12vw, 165px);
+  }
+
   .nav .bar_menu .sub_menu {
     width: 120px;
   }
@@ -61,7 +115,7 @@
   /* 검색 팝업창 모바일 대응 */
   .search_container {
     width: 98%;
-    margin: 10px;
+    margin: 10px 40px;
   }
   .search_header {
     padding: 18px 20px 12px;
@@ -94,6 +148,118 @@
   .search_suggestions ul li a {
     padding: 6px 12px;
     font-size: 12px;
+  }
+}
+
+@media (max-width: 320px) {
+  /* 검색 팝업창 초소형 화면 대응 */
+  .search_container {
+    width: 95%;
+    margin: 10px 15px;
+    max-width: 280px;
+  }
+  
+  .search_header {
+    padding: 15px 15px 10px;
+  }
+  
+  .search_header h3 {
+    font-size: 18px;
+  }
+  
+  .close_btn {
+    font-size: 18px;
+  }
+  
+  .search_input_area {
+    padding: 15px;
+    gap: 8px;
+  }
+  
+  .search_input {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .search_submit {
+    padding: 8px 12px;
+    font-size: 13px;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .search_suggestions {
+    padding: 0 15px 15px;
+  }
+  
+  .search_suggestions h4 {
+    font-size: 13px;
+    margin-bottom: 10px;
+  }
+  
+  .search_suggestions ul li a {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+  
+  /* 로그인 팝업창 초소형 화면 대응 */
+  .login_container {
+    width: 95%;
+    margin: 10px 15px;
+    max-width: 280px;
+  }
+  
+  .login_header {
+    padding: 15px 15px 10px;
+  }
+  
+  .login_header h3 {
+    font-size: 18px;
+  }
+  
+  .close_btn {
+    font-size: 18px;
+  }
+  
+  .login_form {
+    padding: 15px;
+  }
+  
+  .input_group {
+    margin-bottom: 12px;
+  }
+  
+  .input_group label {
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+  
+  .login_input {
+    padding: 8px 12px;
+    font-size: 13px;
+  }
+  
+  .login_options {
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  
+  .checkbox_label {
+    font-size: 12px;
+  }
+  
+  .login_links {
+    font-size: 12px;
+  }
+  
+  .login_submit {
+    padding: 10px;
+    font-size: 15px;
+    margin-bottom: 12px;
+  }
+  
+  .signup_link {
+    font-size: 13px;
   }
 }
 
