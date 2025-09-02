@@ -295,3 +295,102 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
+// bar_menu 클릭 이벤트 - 서브메뉴 토글
+document.addEventListener('DOMContentLoaded', function() {
+  const barMenu = document.querySelector('.bar_menu a');
+  const subMenu = document.querySelector('.bar_menu .sub_menu');
+  
+  if (barMenu && subMenu) {
+    barMenu.addEventListener('click', function(e) {
+      e.preventDefault();
+      subMenu.classList.toggle('active');
+    });
+    
+    // 메뉴 외부 클릭 시 메뉴 닫기
+    document.addEventListener('click', function(e) {
+      if (!barMenu.contains(e.target) && !subMenu.contains(e.target)) {
+        subMenu.classList.remove('active');
+      }
+    });
+    
+    // ESC 키로 메뉴 닫기
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        subMenu.classList.remove('active');
+      }
+    });
+  }
+  
+  // 검색 팝업창 기능
+  const searchBtn = document.querySelector('.search_btn');
+  const searchPopup = document.querySelector('.search_popup');
+  const closeBtn = document.querySelector('.close_btn');
+  const searchInput = document.querySelector('.search_input');
+  const searchSubmit = document.querySelector('.search_submit');
+  
+  if (searchBtn && searchPopup) {
+    // 검색 버튼 클릭 시 팝업 열기
+    searchBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      searchPopup.classList.add('active');
+      // 팝업이 열린 후 검색 입력창에 포커스
+      setTimeout(() => {
+        searchInput.focus();
+      }, 300);
+    });
+    
+    // 닫기 버튼 클릭 시 팝업 닫기
+    if (closeBtn) {
+      closeBtn.addEventListener('click', function() {
+        searchPopup.classList.remove('active');
+        searchInput.value = '';
+      });
+    }
+    
+    // 검색 제출 버튼 클릭 시
+    if (searchSubmit) {
+      searchSubmit.addEventListener('click', function() {
+        const searchTerm = searchInput.value.trim();
+        if (searchTerm) {
+          // 여기에 실제 검색 로직 추가
+          console.log('검색어:', searchTerm);
+          alert(`"${searchTerm}" 검색 결과를 보여드립니다!`);
+          searchPopup.classList.remove('active');
+          searchInput.value = '';
+        }
+      });
+    }
+    
+    // 팝업 외부 클릭 시 닫기
+    searchPopup.addEventListener('click', function(e) {
+      if (e.target === searchPopup) {
+        searchPopup.classList.remove('active');
+        searchInput.value = '';
+      }
+    });
+    
+    // ESC 키로 팝업 닫기
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && searchPopup.classList.contains('active')) {
+        searchPopup.classList.remove('active');
+        searchInput.value = '';
+      }
+    });
+    
+    // Enter 키로 검색 실행
+    if (searchInput) {
+      searchInput.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          const searchTerm = searchInput.value.trim();
+          if (searchTerm) {
+            console.log('검색어:', searchTerm);
+            alert(`"${searchTerm}" 검색 결과를 보여드립니다!`);
+            searchPopup.classList.remove('active');
+            searchInput.value = '';
+          }
+        }
+      });
+    }
+  }
+});
+

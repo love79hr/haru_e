@@ -41,3 +41,8 @@ img, video{vertical-align: top; width: 100%; display: block;}
   display: block;
   clear: both;
 }
+
+*::selection{
+  background-color: var(--point-color);
+  color: var(--text2-color);
+}
