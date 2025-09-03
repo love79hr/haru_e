@@ -1344,7 +1344,6 @@
 .event{
   width: 100%;
   height: auto;
-  position: relative;
 }
 
 .event .event_cont{
@@ -1472,6 +1471,9 @@
   height: 100%;
   object-fit: cover;
   object-position: 50% 50%;
+}
+.best_review .review_swiper .swiper-slide:nth-of-type(2) .review_img img{
+  object-position: 50% 10%;
 }
 .best_review .review_swiper .r_box .review_cont{
   width: 42%;
