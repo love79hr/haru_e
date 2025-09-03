@@ -22,7 +22,7 @@
   position: fixed;
   top: clamp(20px, 2.1vw, 40px);
   background-color: var(--bg-color);
-  padding: clamp(20px, 2.6vw, 50px)
+  padding: clamp(10px, 2vw, 20px)
            clamp(10px, 2.6vw, 50px)
            clamp(10px, 2vw, 10px)
            clamp(10px, 2.6vw, 50px);
@@ -31,13 +31,19 @@
 }
 
 #main{
-  padding-top: clamp(80px, 12vw, 165px);
+  padding-top: clamp(50px, 8vw, 110px);
+}
+
+#shop_nav{
+  width: 100%;
+  height: auto;
+  /* background-color: var(--sub1-color); */
 }
 
 #footer{
   width: 100%;
   background-color: var(--main-color);
-  margin-top: clamp(40px, 5vw, 50px);
+  /* margin-top: clamp(40px, 5vw, 50px); */
 }
 
 /* 컨테이너 영역 */
@@ -170,9 +176,19 @@
   width: auto;
   height: auto;
 }
-.logo a{}
+.logo a{
+  display: inline-block;
+}
 .logo a img{
-  width: clamp(100px, 20vw, 245px);
+  width: clamp(80px, 20vw, 130px);
+}
+.logo h1{
+  display: inline-block;
+  margin-left: clamp(5px, 1vw, 10px);
+  font-family: 'NanumSquareNeoHeavy';
+  font-size: clamp(18px, 2vw, 28px);
+  color: var(--point-color);
+  transform: translateY(-5%);
 }
 
 .user{}
@@ -251,6 +267,96 @@
 }
 
 /* Shop 페이지 전용 스타일 */
+
+/* shop_nav 영역 ----------------------------------------*/
+.shop_nav{
+  width: 100%;
+  height: auto;
+  padding: 4% 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.shop_nav .nav_list{
+  width: 50%;
+  height: auto;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  /* background-color: aquamarine; */
+}
+.shop_nav .nav_list .nav_box{
+  width: 20%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  /* justify-content: center; */
+  /* align-items: center; */
+  text-align: center;
+  /* background-color: lightcoral; */
+}
+
+.shop_nav .nav_list .nav_box a{}
+.shop_nav .nav_list .nav_box a i{
+  padding-right: 2.5%;
+}
+.shop_nav .nav_list .nav_box a h3{
+  display: inline-block;
+  margin-bottom: 5%;
+  font-family: var(--subKor-font);
+  font-size: clamp(13px, 2vw, 22px);
+  color: var(--text1-color);
+}
+.shop_nav .nav_list .nav_box.click a i{
+  color: var(--point-color);
+}
+.shop_nav .nav_list .nav_box.click a h3{
+  color: var(--point-color);
+}
+
+
+.shop_nav .nav_list .nav_box ul{}
+.shop_nav .nav_list .nav_box ul li{
+  margin-top: 5%;
+}
+
+.shop_nav .nav_list .nav_box ul li p{
+  font-family: var(--mainKor-font);
+  font-size: clamp(9px, 2vw, 15px);
+  color: var(--text1-color);
+  line-height: 1.2;
+  margin: 0;
+}
+
+
+@media (max-width: 1300px){
+  .shop_nav .nav_list{
+    width: 75%;
+  }
+}
+
+@media (max-width: 960px){
+  #main{
+    padding-top: 100px;
+  }
+}
+
+@media (max-width: 660px){
+  #main{
+    padding-top: clamp(80px, 12vw, 100px) !important;
+  }
+
+  .shop_nav .nav_list{
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px){
+  .shop_nav .nav_list .nav_box a h3{
+    display: block;
+  }
+}
 
 
 
