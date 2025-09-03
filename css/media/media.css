@@ -149,6 +149,13 @@
     padding: 6px 12px;
     font-size: 12px;
   }
+  
+  /* 장바구니 팝업창 모바일 대응 */
+  .cart_clear {
+    word-break: keep-all;
+    white-space: normal;
+    line-height: 1.2;
+  }
 }
 
 @media (max-width: 320px) {
@@ -323,6 +330,7 @@
   }
   /* hover 시 높이 증가 효과 */
   .category .category_list .c_box:hover{
+    flex: 1.5;
     height: 250px;
     transition: height 0.3s ease;
   }
@@ -358,10 +366,10 @@
   }
   .main_image{
     width: 80%;
-    height: clamp(200px, 45vw, 380px);
+    /* height: clamp(200px, 45vw, 380px); */
   }
   .main_image img{
-    height: clamp(200px, 45vw, 380px);
+    /* height: clamp(200px, 45vw, 380px); */
     object-fit: cover;
     object-position: 50% 65%;
   }

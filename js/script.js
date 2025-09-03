@@ -133,7 +133,7 @@ document.addEventListener('DOMContentLoaded', function() {
           mainImage.src = newImageSrc;
           mainImage.style.opacity = '1';
           mainImage.style.transform = 'scale(1.02)';
-        }, 300);
+        }, 200);
       }
     });
   });
