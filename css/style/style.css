@@ -1365,6 +1365,7 @@
   margin-top: clamp(15px, 2vw, 20px);
   margin-bottom: clamp(15px, 2vw, 20px);
   color: var(--text2-color);
+  word-break: keep-all;
 }
 .event .event_cont p em{
   color: var(--text1-color);
