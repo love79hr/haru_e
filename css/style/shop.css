@@ -355,7 +355,7 @@
   width: 100%;
   height: auto;
   font-family: 'NanumSquareNeoBold';
-  margin-bottom: 5%;
+  margin-bottom: 10%;
   padding: clamp(30px, 5vw, 60px) 0
            clamp(20px, 5vw, 30px) 0;
   background-size: cover;
@@ -416,7 +416,7 @@
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-  padding-bottom: 7%;
+  padding-bottom: 10%;
 }
 
 .item_box{
@@ -475,6 +475,7 @@
 
 
 
+/* 미디어 영역 */
 
 @media (max-width: 1300px){
   .shop_nav .nav_list{
@@ -496,6 +497,9 @@
   }
 }
 @media (max-width: 480px){
+  .shop_nav{
+    padding: 8% 0;
+  }
   .shop_nav .nav_list .nav_box a h3{
     display: block;
   }
@@ -503,7 +507,6 @@
   .item_box{
     width: 31%;
   }
-
 
 }
 
