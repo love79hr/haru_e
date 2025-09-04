@@ -45,7 +45,7 @@
 #shop_fabric,
 #shop_flower{
   width: 100%;
-  height: 150vh;
+  height: auto;
 }
 
 #footer{
@@ -58,9 +58,10 @@
 .container{
   margin: 0 auto;
   width: auto;
+  height: inherit;
   max-width: 1280px;
   position: relative;
-  background-color: rgba(255, 0, 0, 0.1);
+  /* background-color: rgba(255, 0, 0, 0.1); */
 }
 .row{
   padding: 0 clamp(10px, 2vw, 20px);
@@ -344,30 +345,32 @@
 .shop_deco,
 .shop_fabric,
 .shop_flower{
-  width: 100%;
+  width: 100%;  
+  min-height: fit-content;
   height: auto;
-  height: clamp(8px, 15vw, 150px);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  position: relative;
+  
 }
 
 .c_title{
+  width: 100%;
+  height: auto;
   font-family: 'NanumSquareNeoBold';
-  position: static; /* absolute 제거 */
-  margin-bottom: 50px; /* 타이틀 아래 여백 */
-  padding: clamp(30px, 5vw, 60px) clamp(10px, 2vw, 20px); /* 기존 위치를 padding으로 대체 */
-  /* background-color 제거 - p::after로만 처리 */
-  border-radius: 8px; /* 모서리 둥글게 */
+  margin-bottom: 5%;
+  padding: clamp(40px, 5vw, 60px) 0
+           clamp(20px, 5vw, 30px) 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
+
 .c_title h2.shop_h2{
-  font-size: clamp(18px, 3vw, 30px);
+  font-size: clamp(16px, 3vw, 30px);
   color: var(--text2-color);
   margin-bottom: 1%;
 }
+
 .c_title p{
-  width: auto; /* 자동 너비 */
+  width: auto;
   display: table; /* 테이블로 변경 */
   white-space: nowrap; /* 텍스트 줄바꿈 방지 */
   font-size: clamp(10px, 2vw, 15px);
@@ -375,7 +378,6 @@
   position: relative;
   z-index: 10; /* 가상요소보다 위에 보이도록 */
 }
-
 .c_title p::after{
   content: "";
   position: absolute;
@@ -389,24 +391,17 @@
 }
 
 
-
-/* shop_light 영역 ----------------------------------------*/
-.shop_light{
+/* 타이틀 배경 이미지 ----------------------------------------*/
+.light_title{
   background-image: url("https://github.com/love79hr/haru_e/blob/main/images/light_bg.png?raw=true");  
 }
-
-/* shop_deco 영역 ----------------------------------------*/
-.shop_deco{
+.deco_title{
   background-image: url("https://github.com/love79hr/haru_e/blob/main/images/deco_bg.png?raw=true");
 }
-
-/* shop_fabric 영역 ----------------------------------------*/
-.shop_fabric{
+.fabric_title{
   background-image: url("https://github.com/love79hr/haru_e/blob/main/images/fabric_bg.png?raw=true");
 }
-
-/* shop_flower 영역 ----------------------------------------*/
-.shop_flower{
+.flower_title{
   background-image: url("https://github.com/love79hr/haru_e/blob/main/images/flower_bg.png?raw=true");
 }
 
@@ -416,67 +411,62 @@
 
 /* c_list 영역 - PC 화면용 */
 .c_list{
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 20px;
-  margin-top: 0; /* 타이틀과의 간격은 c_title의 margin-bottom으로 조절 */
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding-bottom: 7%;
 }
 
-/* item_box 영역 - PC 화면용 */
 .item_box{
-  width: 290px;
+  width: 23.5%;
   height: auto;
-  overflow: visible;
+  padding-bottom: 5%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
 }
 
 /* img_box 영역  */
 .img_box{
-  width: 290px;
-  height: 290px;
+  padding-bottom: 1%;
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 10%;
   overflow: hidden;
-  border-radius: 20px;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; 
 }
 
 .img_box img{
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s ease;
+  border-radius: 10%;
+  transition: all 0.3s ease;
 }
 .item_box:hover .img_box img{
   transform: scale(1.08);
 }
 
-/* info_box 영역 - 텍스트 왼쪽 정렬 */
 .info_box{
+  width: 100%;
   font-family: 'NanumSquareNeoBold';
-  padding: 10px 0;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  text-align: left;
+  padding-top: 3%;
 }
 
 .item_name{
-  font-size: 14px;
-  color: var(--text1-color);
-  line-height: 1.3;
+  font-size: clamp(9px, 2vw, 14px);
+  padding-bottom: 1%;
+  word-break: keep-all;
+  white-space: nowrap;
   overflow: hidden;
-  text-overflow: ellipsis;
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  text-align: left;
-  padding-bottom: 5px;
+  text-overflow: ellipsis;  
 }
 
 .item_price{
-  font-size: 16px;
+  font-size: clamp(9px, 2vw, 16px);
   color: var(--point-color);
-  margin: 0;
-  text-align: left;
 }
 
 
