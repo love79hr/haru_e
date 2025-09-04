@@ -356,7 +356,7 @@
   height: auto;
   font-family: 'NanumSquareNeoBold';
   margin-bottom: 5%;
-  padding: clamp(40px, 5vw, 60px) 0
+  padding: clamp(30px, 5vw, 60px) 0
            clamp(20px, 5vw, 30px) 0;
   background-size: cover;
   background-position: center;
