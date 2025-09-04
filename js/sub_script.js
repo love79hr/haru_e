@@ -1,41 +1,8 @@
-// 공통 JavaScript - 모든 페이지에서 사용
+// Shop 페이지 전용 JavaScript - 완전 독립형 (공통 기능 포함)
 
-// 페이지 로드 시 초기 상태 설정
-const topElement = document.getElementById('top');
-const headerElement = document.getElementById('header');
-
-// 공통 스크롤 이벤트 리스너
-window.addEventListener('scroll', function() {
-  const scrollTop = window.scrollY;
-  
-  if (scrollTop > 50) {
-    // top 영역을 숨기기
-    if (topElement) {
-      topElement.classList.add('hide');
-    }
-
-    // 헤더를 상단에 고정하고 스타일 변경
-    if (headerElement) {
-      headerElement.style.position = 'fixed';
-      headerElement.style.top = '0';
-      headerElement.style.padding = 'clamp(5px, 1vw, 10px) clamp(15px, 3vw, 30px) clamp(5px, 1vw, 10px) clamp(15px, 3vw, 30px)';
-      headerElement.style.backgroundColor = 'var(--bg-color2)';
-    }
-  } else {
-    // top 영역을 다시 보이기
-    if (topElement) {
-      topElement.classList.remove('hide');
-    }
-
-    // 헤더를 원래 위치로 복원
-    if (headerElement) {
-      headerElement.style.position = 'fixed';
-      headerElement.style.top = 'clamp(20px, 2.1vw, 40px)';
-      headerElement.style.padding = 'clamp(10px, 2vw, 20px) clamp(15px, 3vw, 30px) clamp(10px, 2vw, 10px) clamp(15px, 3vw, 30px)';
-      headerElement.style.backgroundColor = 'var(--bg-color)';
-    }
-  }
-});
+// ========================================
+// 공통 기능 - 모든 페이지에서 사용
+// ========================================
 
 // 로그인 팝업창 요소들
 const loginBtn = document.querySelector('.login_btn');
@@ -68,145 +35,7 @@ if (loginPopup) {
   });
 }
 
-// 카테고리별 이미지 데이터
-const categoryImages = {
-  '조명 / 캔들': [
-    {
-      main: 'https://github.com/love79hr/haru_e/blob/main/images/item_1.png?raw=true',
-      thumbnails: [
-        'https://github.com/love79hr/haru_e/blob/main/images/item_1.png?raw=true',
-        'https://github.com/love79hr/haru_e/blob/main/images/item_2.png?raw=true',
-        'https://github.com/love79hr/haru_e/blob/main/images/item_3.png?raw=true',
-        'https://github.com/love79hr/haru_e/blob/main/images/item_4.png?raw=true'
-      ]
-    }
-  ],
-  '장식 데코': [
-    {
-      main: 'https://github.com/love79hr/haru_e/blob/main/images/item_5.png?raw=true',
-      thumbnails: [
-        'https://github.com/love79hr/haru_e/blob/main/images/item_5.png?raw=true',
-        'https://github.com/love79hr/haru_e/blob/main/images/item_6.png?raw=true',
-        'https://github.com/love79hr/haru_e/blob/main/images/item_7.png?raw=true',
-        'https://github.com/love79hr/haru_e/blob/main/images/item_8.png?raw=true'
-      ]
-    }
-  ],
-  '패브릭 소품': [
-    {
-      main: 'https://github.com/love79hr/haru_e/blob/main/images/item_9.png?raw=true',
-      thumbnails: [
-        'https://github.com/love79hr/haru_e/blob/main/images/item_9.png?raw=true',
-        'https://github.com/love79hr/haru_e/blob/main/images/item_10.png?raw=true',
-        'https://github.com/love79hr/haru_e/blob/main/images/item_11.png?raw=true',
-        'https://github.com/love79hr/haru_e/blob/main/images/item_12.png?raw=true'
-      ]
-    }
-  ],
-  '플라워 / 그린': [
-    {
-      main: 'https://github.com/love79hr/haru_e/blob/main/images/item_13.png?raw=true',
-      thumbnails: [
-        'https://github.com/love79hr/haru_e/blob/main/images/item_13.png?raw=true',
-        'https://github.com/love79hr/haru_e/blob/main/images/item_14.png?raw=true',
-        'https://github.com/love79hr/haru_e/blob/main/images/item_15.png?raw=true',
-        'https://github.com/love79hr/haru_e/blob/main/images/item_16.png?raw=true'
-      ]
-    }
-  ]
-};
 
-// Best Item 이미지 갤러리 기능
-document.addEventListener('DOMContentLoaded', function() {
-  const bItems = document.querySelectorAll('.b_item');
-  const mainImage = document.querySelector('.main_image img');
-  const tabButtons = document.querySelectorAll('.item_category ul li a');
-  const tabItems = document.querySelectorAll('.item_category ul li');
-  
-  // 썸네일 클릭 이벤트
-  bItems.forEach(item => {
-    item.addEventListener('click', function() {
-      // 모든 썸네일에서 active 클래스 제거
-      bItems.forEach(bItem => bItem.classList.remove('active'));
-      
-      // 클릭된 썸네일에 active 클래스 추가
-      this.classList.add('active');
-      
-      // 메인 이미지 변경
-      const newImageSrc = this.getAttribute('data-image');
-      if (mainImage && newImageSrc) {
-        // 부드러운 전환 효과
-        mainImage.style.opacity = '0';
-        mainImage.style.transform = 'scale(1)';
-        
-        setTimeout(() => {
-          mainImage.src = newImageSrc;
-          mainImage.style.opacity = '1';
-          mainImage.style.transform = 'scale(1.02)';
-        }, 200);
-      }
-    });
-  });
-  
-  // 탭 메뉴 클릭 이벤트
-  tabButtons.forEach(button => {
-    button.addEventListener('click', function(e) {
-      e.preventDefault();
-      
-      // 모든 탭에서 active 클래스 제거
-      tabItems.forEach(item => item.classList.remove('on'));
-      
-      // 클릭된 탭에 active 클래스 추가
-      this.parentElement.classList.add('on');
-      
-      // 탭 텍스트에 따른 이미지 변경
-      const tabText = this.querySelector('p').textContent;
-      changeImagesByCategory(tabText);
-    });
-  });
-  
-  // 페이지 로드 시 첫 번째 탭 활성화
-  if (tabItems.length > 0) {
-    tabItems[0].classList.add('on');
-    const firstTabText = tabButtons[0].querySelector('p').textContent;
-    changeImagesByCategory(firstTabText);
-  }
-});
-
-// 카테고리별 이미지 변경 함수
-function changeImagesByCategory(category) {
-  const mainImage = document.querySelector('.main_image img');
-  const bItems = document.querySelectorAll('.b_item');
-  
-  if (categoryImages[category] && categoryImages[category][0]) {
-    const images = categoryImages[category][0];
-    
-    // 메인 이미지 변경
-    if (mainImage) {
-      mainImage.style.opacity = '0';
-      mainImage.style.transform = 'scale(0.95)';
-      
-      setTimeout(() => {
-        mainImage.src = images.main;
-        mainImage.style.opacity = '1';
-        mainImage.style.transform = 'scale(1)';
-      }, 200);
-    }
-    
-    // 썸네일 이미지들 변경
-    bItems.forEach((item, index) => {
-      if (images.thumbnails[index]) {
-        const img = item.querySelector('img');
-        img.src = images.thumbnails[index];
-        item.setAttribute('data-image', images.thumbnails[index]);
-      }
-    });
-    
-    // 첫 번째 썸네일을 활성화
-    bItems.forEach(item => item.classList.remove('active'));
-    bItems[0].classList.add('active');
-  }
-}
 
 // 이벤트 바로가기 버튼 마우스 따라다니기 기능
 document.addEventListener('DOMContentLoaded', function() {
@@ -215,41 +44,22 @@ document.addEventListener('DOMContentLoaded', function() {
   
   if (eventCont && shortcutBtn) {
     let isHovering = false;
-    let isButtonHovering = false;
     
     // 마우스가 event_cont 영역에 들어올 때
     eventCont.addEventListener('mouseenter', function() {
       isHovering = true;
-      if (!isButtonHovering) {
-        shortcutBtn.classList.add('show');
-      }
+      shortcutBtn.classList.add('show');
     });
     
     // 마우스가 event_cont 영역을 벗어날 때
     eventCont.addEventListener('mouseleave', function() {
       isHovering = false;
-      if (!isButtonHovering) {
-        shortcutBtn.classList.remove('show');
-      }
-    });
-    
-    // 버튼에 마우스가 들어올 때
-    shortcutBtn.addEventListener('mouseenter', function() {
-      isButtonHovering = true;
-      shortcutBtn.classList.add('show');
-    });
-    
-    // 버튼에서 마우스가 벗어날 때
-    shortcutBtn.addEventListener('mouseleave', function() {
-      isButtonHovering = false;
-      if (!isHovering) {
-        shortcutBtn.classList.remove('show');
-      }
+      shortcutBtn.classList.remove('show');
     });
     
     // 마우스 움직임 감지
     eventCont.addEventListener('mousemove', function(e) {
-      if (isHovering && !isButtonHovering) {
+      if (isHovering) {
         // 마우스 위치 계산
         const rect = eventCont.getBoundingClientRect();
         const mouseX = e.clientX - rect.left;
@@ -263,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const newX = mouseX + offsetX;
         const newY = mouseY + offsetY;
         
-        // 화면 경계 체크 (버튼이 이벤트 영역을 벗어나지 않도록)
+        // 화면 경계 체크
         const maxX = rect.width - btnRect.width - 10;
         const maxY = rect.height - btnRect.height - 10;
         
@@ -454,7 +264,6 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 });
 
-
 // 장바구니 팝업창 요소들
 const cartBtn = document.querySelector('.cart_btn');
 const cartPopup = document.querySelector('.cart_popup');
@@ -623,3 +432,279 @@ document.addEventListener('DOMContentLoaded', function() {
   // ========================================
   checkEmptyCart(); // 페이지 로드 시 장바구니 상태 체크
 });
+
+// ========================================
+// Shop 페이지 전용 변수들
+// ========================================
+let shopTopElement = null;
+let shopHeaderElement = null;
+let shopNavElement = null;
+
+// Shop 페이지 전용 요소 초기화
+function initShopElements() {
+  shopTopElement = document.getElementById('top');
+  shopHeaderElement = document.getElementById('header');
+  shopNavElement = document.querySelector('.shop_nav');
+  
+  console.log('Shop 요소 초기화:', {
+    top: shopTopElement,
+    header: shopHeaderElement,
+    shopNav: shopNavElement
+  });
+}
+
+// 페이지 로드 시 shop nav 초기 위치 설정
+function setShopNavPosition() {
+  // 요소가 없으면 다시 초기화 시도
+  if (!shopNavElement || !shopHeaderElement || !shopTopElement) {
+    initShopElements();
+  }
+  
+  if (shopNavElement && shopHeaderElement && shopTopElement) {
+    // top 영역과 헤더 높이를 모두 계산
+    const topHeight = shopTopElement.offsetHeight;
+    const headerHeight = shopHeaderElement.offsetHeight;
+    const totalHeight = topHeight + headerHeight;
+    
+    // top + 헤더 높이만큼 margin-top 설정
+    shopNavElement.style.marginTop = totalHeight + 'px';
+    console.log('Shop - Top height:', topHeight, 'Header height:', headerHeight, 'Total margin-top:', shopNavElement.style.marginTop);
+  } else {
+    console.error('Shop 요소를 찾을 수 없습니다:', {
+      shopNav: shopNavElement,
+      header: shopHeaderElement,
+      top: shopTopElement
+    });
+  }
+}
+
+// Shop 페이지 전용 초기화 함수
+function initShopPage() {
+  initShopElements();
+  setTimeout(setShopNavPosition, 100);
+  setTimeout(setShopNavPosition, 300);
+  setTimeout(setShopNavPosition, 500); // 추가 지연
+}
+
+// DOM 로드 완료 시
+document.addEventListener('DOMContentLoaded', function() {
+  console.log('DOM 로드 완료 - Shop 초기화 시작');
+  initShopPage();
+});
+
+// 윈도우 로드 완료 시
+window.addEventListener('load', function() {
+  console.log('윈도우 로드 완료 - Shop 초기화 시작');
+  initShopPage();
+});
+
+// 윈도우 리사이즈 시
+window.addEventListener('resize', function() {
+  setTimeout(setShopNavPosition, 100);
+});
+
+// 즉시 실행 (여러 번 시도)
+setTimeout(initShopPage, 0);
+setTimeout(initShopPage, 50);
+setTimeout(initShopPage, 200);
+
+// Shop 페이지 전용 스크롤 이벤트 리스너
+window.addEventListener('scroll', function() {
+  const scrollTop = window.scrollY;
+  const floatingButtons = document.querySelector('.shop_floating_buttons');
+  
+  // 플로팅 버튼 표시/숨김
+  if (floatingButtons) {
+    if (scrollTop > 200) {
+      floatingButtons.classList.add('show');
+    } else {
+      floatingButtons.classList.remove('show');
+    }
+  }
+  
+  if (scrollTop > 50) {
+    // top 영역을 숨기기
+    if (shopTopElement) {
+      shopTopElement.classList.add('hide');
+    }
+
+    // 헤더를 상단에 고정하고 스타일 변경
+    if (shopHeaderElement) {
+      shopHeaderElement.style.position = 'fixed';
+      shopHeaderElement.style.top = '0';
+      shopHeaderElement.style.padding = 'clamp(5px, 1vw, 10px) clamp(10px, 2.6vw, 50px) clamp(5px, 1vw, 10px) clamp(10px, 2.6vw, 50px)';
+      shopHeaderElement.style.backgroundColor = 'var(--bg-color2)';
+    }
+
+    // shop nav를 헤더 바로 아래에 정확히 위치시키기 (top 영역은 숨겨짐)
+    if (shopNavElement && shopHeaderElement) {
+      // 헤더 높이만 계산 (top 영역은 숨겨짐)
+      const headerHeight = shopHeaderElement.offsetHeight;
+      shopNavElement.style.marginTop = headerHeight + 'px';
+      
+      // shop nav의 ul들만 숨기기 (h3은 유지)
+      const navBoxes = shopNavElement.querySelectorAll('.nav_box ul');
+      navBoxes.forEach(ul => {
+        ul.style.display = 'none';
+      });
+      
+      // h3 요소들을 보이게 하기
+      const h3Elements = shopNavElement.querySelectorAll('.nav_box h3');
+      h3Elements.forEach(h3 => {
+        h3.style.display = 'block';
+        h3.style.visibility = 'visible';
+      });
+    }
+  } else {
+    // top 영역을 다시 보이기
+    if (shopTopElement) {
+      shopTopElement.classList.remove('hide');
+    }
+
+    // 헤더를 원래 위치로 복원
+    if (shopHeaderElement) {
+      shopHeaderElement.style.position = 'fixed';
+      shopHeaderElement.style.top = 'clamp(20px, 2.1vw, 40px)';
+      shopHeaderElement.style.padding = 'clamp(20px, 2.6vw, 50px) clamp(10px, 2.6vw, 50px) clamp(10px, 2vw, 10px) clamp(10px, 2.6vw, 50px)';
+      shopHeaderElement.style.backgroundColor = 'var(--bg-color)';
+    }
+
+    // shop nav를 원래 위치로 복원
+    if (shopNavElement && shopHeaderElement && shopTopElement) {
+      // top 영역과 헤더 높이를 모두 계산
+      const topHeight = shopTopElement.offsetHeight;
+      const headerHeight = shopHeaderElement.offsetHeight;
+      const totalHeight = topHeight + headerHeight;
+      shopNavElement.style.marginTop = totalHeight + 'px';
+      
+      // shop nav의 ul들을 다시 보이기 (480px 이하에서는 숨김)
+      const navBoxes = shopNavElement.querySelectorAll('.nav_box ul');
+      const isMobile = window.innerWidth <= 480;
+      navBoxes.forEach(ul => {
+        ul.style.display = isMobile ? 'none' : 'block';
+      });
+      
+      // h3 요소들을 보이게 하기
+      const h3Elements = shopNavElement.querySelectorAll('.nav_box h3');
+      h3Elements.forEach(h3 => {
+        h3.style.display = 'block';
+        h3.style.visibility = 'visible';
+      });
+    }
+  }
+});
+
+// Shop 페이지 네비게이션 기능 - 독립형
+function initShopNavigation() {
+  // shop nav 클릭 이벤트
+  const navBoxes = document.querySelectorAll('.shop_nav .nav_list .nav_box');
+  const sections = {
+    '조명 / 캔들': document.getElementById('shop_light'),
+    '장식 데코': document.getElementById('shop_deco'),
+    '패브릭 소품': document.getElementById('shop_fabric'),
+    '플라워 / 그린': document.getElementById('shop_flower')
+  };
+
+  navBoxes.forEach(navBox => {
+    navBox.addEventListener('click', function() {
+      const h3Text = this.querySelector('h3').textContent.trim();
+      const targetSection = sections[h3Text];
+      
+      if (targetSection) {
+        // 모든 nav_box에서 click 클래스 제거
+        navBoxes.forEach(box => box.classList.remove('click'));
+        
+        // 클릭된 nav_box에 click 클래스 추가
+        this.classList.add('click');
+        
+        // 해당 섹션으로 스크롤
+        const headerHeight = shopHeaderElement ? shopHeaderElement.offsetHeight : 0;
+        const shopNavHeight = shopNavElement ? shopNavElement.offsetHeight : 0;
+        const sectionTop = targetSection.offsetTop;
+        const scrollPosition = sectionTop - headerHeight - shopNavHeight - 20; // 20px 여백 추가
+        
+        window.scrollTo({
+          top: scrollPosition,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+
+  // 스크롤 시 활성 섹션 하이라이트
+  window.addEventListener('scroll', function() {
+    const headerHeight = shopHeaderElement ? shopHeaderElement.offsetHeight : 0;
+    const shopNavHeight = shopNavElement ? shopNavElement.offsetHeight : 0;
+    const scrollPosition = window.scrollY + headerHeight + shopNavHeight + 50; // 고정된 요소들 고려한 오프셋
+    
+    // 모든 nav_box에서 click 클래스 제거
+    navBoxes.forEach(box => box.classList.remove('click'));
+    
+    // 현재 보이는 섹션 찾기
+    let activeSection = null;
+    Object.values(sections).forEach(section => {
+      if (section && scrollPosition >= section.offsetTop - 100) {
+        activeSection = section;
+      }
+    });
+    
+    // 활성 섹션에 해당하는 nav_box에 click 클래스 추가
+    if (activeSection) {
+      const sectionId = activeSection.id;
+      const sectionNames = {
+        'shop_light': '조명 / 캔들',
+        'shop_deco': '장식 데코',
+        'shop_fabric': '패브릭 소품',
+        'shop_flower': '플라워 / 그린'
+      };
+      
+      const sectionName = sectionNames[sectionId];
+      if (sectionName) {
+        navBoxes.forEach(navBox => {
+          if (navBox.querySelector('h3').textContent.trim() === sectionName) {
+            navBox.classList.add('click');
+          }
+        });
+      }
+    }
+  });
+}
+
+// Shop 페이지 네비게이션 초기화
+document.addEventListener('DOMContentLoaded', function() {
+  initShopNavigation();
+  initFloatingButtons();
+});
+
+// 플로팅 버튼 기능 초기화
+function initFloatingButtons() {
+  const floatingButtons = document.querySelectorAll('.floating_btn');
+  
+  floatingButtons.forEach(button => {
+    button.addEventListener('click', function() {
+      const sectionId = this.getAttribute('data-section');
+      
+      if (sectionId) {
+        // 섹션으로 이동
+        const targetSection = document.getElementById(sectionId);
+        if (targetSection) {
+          const headerHeight = shopHeaderElement ? shopHeaderElement.offsetHeight : 0;
+          const shopNavHeight = shopNavElement ? shopNavElement.offsetHeight : 0;
+          const sectionTop = targetSection.offsetTop;
+          const scrollPosition = sectionTop - headerHeight - shopNavHeight - 20;
+          
+          window.scrollTo({
+            top: scrollPosition,
+            behavior: 'smooth'
+          });
+        }
+      } else if (this.classList.contains('floating_top_btn')) {
+        // 맨 위로 이동
+        window.scrollTo({
+          top: 0,
+          behavior: 'smooth'
+        });
+      }
+    });
+  });
+}

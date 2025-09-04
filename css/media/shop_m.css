@@ -1,14 +1,61 @@
 @charset "utf-8";
 
-/* 공통 스타일 미디어 쿼리 */
 
+/* 공통 미디어 쿼리 - top, header, main, footer */
 @media (max-width: 1290px) {
   .container{
     width: 100%;
   }
 }
 
-/* top 영역 */
+@media (max-width: 1280px) {
+  #top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 100;
+  }
+  
+  #header {
+    position: fixed;
+    top: clamp(20px, 2.1vw, 40px);
+    left: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 100;
+  }
+  
+  #main {
+    padding-top: clamp(80px, 12vw, 165px);
+  }
+}
+
+@media (max-width: 1024px) {
+  #top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 100;
+  }
+  
+  #header {
+    position: fixed;
+    top: clamp(20px, 2.1vw, 40px);
+    left: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 100;
+  }
+  
+  #main {
+    padding-top: clamp(80px, 12vw, 165px);
+  }
+}
+
 @media (max-width: 768px) {
   html, body {
     margin: 0;
@@ -50,6 +97,7 @@
     font-size: 14px;
   }
 }
+
 @media (max-width: 480px) {
   html, body {
     margin: 0;
@@ -83,30 +131,190 @@
     width: 120px;
   }
   .nav .bar_menu .sub_menu ul {
-    padding: 12px 0;
-    gap: 10px;
+    padding: 10px 0;
+    gap: 8px;
   }
   .nav .bar_menu .sub_menu ul li a {
     padding: 6px 12px;
-    font-size: 13px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 320px) {
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
+  #top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 100;
+  }
+  
+  #header {
+    position: fixed;
+    top: clamp(20px, 2.1vw, 40px);
+    left: 0;
+    right: 0;
+    width: 100vw;
+    z-index: 100;
+  }
+  
+  #main {
+    padding-top: clamp(80px, 12vw, 165px);
+  }
+
+  .nav .bar_menu .sub_menu {
+    width: 100px;
+  }
+  .nav .bar_menu .sub_menu ul {
+    padding: 8px 0;
+    gap: 6px;
+  }
+  .nav .bar_menu .sub_menu ul li a {
+    padding: 5px 10px;
+    font-size: 11px;
+  }
+}
+
+/* shop_nav 영역 */
+@media (max-width: 1300px){
+  .shop_nav{
+    margin-top: 0 !important;
+  }
+  .shop_nav .nav_list{
+    width: 75%;
+  }
+}
+
+@media (max-width: 660px){  
+  .shop_nav{
+    padding: 40px 0 20px 0;
+  }
+  .shop_nav .nav_list{
+    width: 100%;
+  }
+  .shop_nav .nav_list .nav_box a h3{
+    display: block;
+  }
+
+  /* user 영역 간격 조정 */
+  .user ul{
+    gap: clamp(8px, 1.5vw, 15px);
+  }
+  .user{
+    margin-right: clamp(5px, 1.5vw, 15px);
+  }
+
+  .c_list{
+    padding: 0 23px 50px 23px;
+  }
+  .item_box{
+    width: 30%;
+    padding-bottom: 10%;
+  }
+}
+
+@media (max-width: 480px){
+  .shop_nav{
+    padding: 40px 0 10px 0;
+  }
+  .shop_nav .nav_list .nav_box a h3{
+    font-size: 14px;
+    white-space: nowrap;
+    letter-spacing: -0.05em;
+  }
+  .shop_nav .nav_list .nav_box ul{
+    display: none !important;
+  }
+
+  .c_title p::after{
+    bottom: -5px;
+    height: 100%;
+  }
+
+  .c_list{
+    padding: 0 23px 50px 23px;
+  }
+  .item_box{
+    width: 46%;
+  }
+
+  .shop_floating_buttons {
+    right: 0px;
+  }
+}
+
+@media (max-width: 320px){  
+  .shop_nav{
+    padding: 30px 10px 20px 10px;
+  }
+  .c_title{
+    padding: 20px 0 10px 0;
+    margin-bottom: 5%;
+    text-align: center;
+  }
+  .c_title h2.shop_h2{
+    font-size: 16px;
+  }  
+  .c_title p{
+    font-size: 11px;
+    display: block;
+    text-align: center;
+  }
+  .c_list{
+    padding: 20px 20px 50px 20px;
+  }
+  .item_box{
+    width: 46%;
+  }
+  
+  /* 플로팅 버튼 미디어 쿼리 */
+  .shop_floating_buttons {
+    right: 0px;
+  }
+  
+  .floating_btn {
+    width: 45px;
+    height: 45px;
+    font-size: 16px;
+    border-width: 1px;
+  }
+  
+  .floating_btn[title]::before {
+    right: 55px;
+    font-size: 11px;
+    padding: 8px 12px;
+  }
+  
+  .floating_btn[title]::after {
+    right: 45px;
+    border-width: 5px;
   }
 }
 
 /* footer 영역 */
-@media (max-width: 1280px) {
+@media (max-width: 1280px){
   .footer{
     padding: 3% 1%;
   }
-}
-@media (max-width: 1024px) {
+} 
+
+@media (max-width: 1024px){
   .footer .f_logo{
-    width: 50%;
+    width: 50% ;
   }
   .footer .f_copy{
     width: 50%;
   }
-}
-@media (max-width: 480px) {
+} 
+
+@media (max-width: 480px){
   .footer{
     flex-direction: column;
     align-items: center;
@@ -154,15 +362,3 @@
     padding-top: 10px;
   }
 }
-
-/* Shop 페이지 전용 미디어 쿼리 */
-
-
-
-
-
-
-
-
-
-

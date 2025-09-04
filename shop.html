@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="./css/setting/all.min.css"> <!-- 폰트어썸 CDN 링크 -->
   <link rel="stylesheet" href="https://hangeul.pstatic.net/hangeul_static/css/nanum-square-neo.css">
   <link rel="stylesheet" href="./css/style/shop.css"> <!-- 스타일 링크 -->
-  <link rel="stylesheet" href="./css/media/media.css"> <!-- 미디어 링크 -->
+  <link rel="stylesheet" href="./css/media/shop_m.css"> <!-- 미디어 링크 -->
 </head>
 
 <body>
@@ -45,14 +45,117 @@
       </div> <!-- // logo -->
       <div class="user">
         <ul>
-          <li>
+          <li class="search">
             <a href="javascript:;" class="search_btn"><i class="fa-solid fa-magnifying-glass"></i></a>
+            <div class="search_popup">
+              <div class="search_container">
+                <div class="search_header">
+                  <h3>SEARCH</h3>
+                  <button class="close_btn"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="search_input_area">
+                  <input type="text" placeholder="찾고 싶은 상품을 검색해보세요" class="search_input">
+                  <button class="search_submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                </div>
+                <div class="search_suggestions">
+                  <h4>인기 검색어</h4>
+                  <ul>
+                    <li><a href="javascript:;">무드등</a></li>
+                    <li><a href="javascript:;">캔들</a></li>
+                    <li><a href="javascript:;">쿠션</a></li>
+                    <li><a href="javascript:;">드라이플라워</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
           </li>
-          <li>
+          <li class="login">
             <a href="javascript:;" class="login_btn"><i class="fa-solid fa-user"></i></a>
+            <div class="login_popup">
+              <div class="login_container">
+                <div class="login_header">
+                  <h3>LOGIN</h3>
+                  <button class="close_btn"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="login_form">
+                  <div class="input_group">
+                    <label for="login_id">아이디</label>
+                    <input type="text" id="login_id" placeholder="아이디를 입력하세요" class="login_input">
+                  </div>
+                  <div class="input_group">
+                    <label for="login_pw">비밀번호</label>
+                    <input type="password" id="login_pw" placeholder="비밀번호를 입력하세요" class="login_input">
+                  </div>
+                  <div class="login_options">
+                    <label class="checkbox_label">
+                      <input type="checkbox" id="remember_login">
+                      <span>로그인 상태 유지</span>
+                    </label>
+                    <div class="login_links">
+                      <a href="javascript:;">아이디 찾기</a>
+                      <span>|</span>
+                      <a href="javascript:;">비밀번호 찾기</a>
+                    </div>
+                  </div>
+                  <button class="login_submit">로그인</button>
+                  <div class="signup_link">
+                    <p>아직 회원이 아니신가요? <a href="javascript:;">회원가입</a></p>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
-          <li>
+          <li class="cart">
             <a href="javascript:;" class="cart_btn"><i class="fa-solid fa-cart-shopping"></i></a>
+            <div class="cart_popup">
+              <div class="cart_container">
+                <div class="cart_header">
+                  <h3>CART</h3>
+                  <button class="close_btn"><i class="fa-solid fa-xmark"></i></button>
+                </div>
+                <div class="cart_content">
+                  <div class="cart_items">
+                    <div class="cart_item">
+                      <div class="item_img">
+                        <img src="https://github.com/love79hr/haru_e/blob/main/images/item_1.png?raw=true" alt="상품 이미지">
+                      </div>
+                      <div class="item_info">
+                        <h4>LED 버섯램프 무선 무드등 조명</h4>
+                        <p class="item_price">18,900원</p>
+                        <div class="quantity_control">
+                          <button class="qty_btn minus">-</button>
+                          <span class="quantity">1</span>
+                          <button class="qty_btn plus">+</button>
+                        </div>
+                      </div>
+                      <button class="remove_item"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                    <div class="cart_item">
+                      <div class="item_img">
+                        <img src="https://github.com/love79hr/haru_e/blob/main/images/item_2.png?raw=true" alt="상품 이미지">
+                      </div>
+                      <div class="item_info">
+                        <h4>아로마 캔들 세트 (3개)</h4>
+                        <p class="item_price">24,900원</p>
+                        <div class="quantity_control">
+                          <button class="qty_btn minus">-</button>
+                          <span class="quantity">2</span>
+                          <button class="qty_btn plus">+</button>
+                        </div>
+                      </div>
+                      <button class="remove_item"><i class="fa-solid fa-trash"></i></button>
+                    </div>
+                  </div>
+                  <div class="cart_summary">
+                    <div class="total_price">
+                      <span>총 상품금액</span>
+                      <span class="total_amount">68,700원</span>
+                    </div>
+                    <button class="checkout_btn">주문하기</button>
+                  </div>
+                </div>
+              </div>
+            </div>
           </li>
         </ul>
       </div> <!-- // user -->
@@ -815,9 +918,34 @@
     </div>
   </footer>
 
+  
+  <!-- Shop 페이지 전용 플로팅 버튼들 -->
+  <div class="shop_floating_buttons">
+    <div class="floating_section_buttons">
+      <button class="floating_btn" data-section="shop_light" title="조명 / 캔들">
+        <i class="fa-solid fa-lightbulb"></i>
+      </button>
+      <button class="floating_btn" data-section="shop_deco" title="장식 데코">
+        <i class="fa-solid fa-palette"></i>
+      </button>
+      <button class="floating_btn" data-section="shop_fabric" title="패브릭 소품">
+        <i class="fa-solid fa-couch"></i>
+      </button>
+      <button class="floating_btn" data-section="shop_flower" title="플라워 / 그린">
+        <i class="fa-solid fa-seedling"></i>
+      </button>
+    </div>
+    <button class="floating_btn floating_top_btn" title="맨 위로">
+      <i class="fa-solid fa-arrow-up"></i>
+    </button>
+  </div>
+
+  
+  
+  
   <!-- 스크립트 링크 영역 -->
-  <script src="./js/script.js"></script> <!-- 스크립트 링크 -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script> <!-- 제이쿼리 링크 연결 -->
+  <script src="./js/sub_script.js"></script> <!-- Shop 페이지 전용 스크립트 (공통 기능 포함) -->
 </body>
 
 </html>
