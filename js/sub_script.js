@@ -674,6 +674,7 @@ function initShopNavigation() {
 document.addEventListener('DOMContentLoaded', function() {
   initShopNavigation();
   initFloatingButtons();
+  initLikeButtons();
 });
 
 // 플로팅 버튼 기능 초기화
@@ -691,7 +692,7 @@ function initFloatingButtons() {
           const headerHeight = shopHeaderElement ? shopHeaderElement.offsetHeight : 0;
           const shopNavHeight = shopNavElement ? shopNavElement.offsetHeight : 0;
           const sectionTop = targetSection.offsetTop;
-          const scrollPosition = sectionTop - headerHeight - shopNavHeight - 20;
+          const scrollPosition = sectionTop - headerHeight - shopNavHeight-(-20);
           
           window.scrollTo({
             top: scrollPosition,
@@ -706,5 +707,74 @@ function initFloatingButtons() {
         });
       }
     });
+  });
+}
+
+// ========================================
+// 좋아요 기능 구현
+// ========================================
+function initLikeButtons() {
+  const likeButtons = document.querySelectorAll('.like_btn');
+  
+  likeButtons.forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      
+      const icon = this.querySelector('i');
+      const isLiked = this.classList.contains('liked');
+      const productId = this.getAttribute('data-product-id');
+      
+      if (isLiked) {
+        // 좋아요 취소
+        this.classList.remove('liked');
+        icon.className = 'fa-regular fa-heart';
+        console.log(`상품 ${productId} 좋아요 취소`);
+        
+        // localStorage에서 제거
+        removeFromLikedProducts(productId);
+      } else {
+        // 좋아요 추가
+        this.classList.add('liked');
+        icon.className = 'fa-solid fa-heart';
+        console.log(`상품 ${productId} 좋아요 추가`);
+        
+        // localStorage에 저장
+        addToLikedProducts(productId);
+      }
+    });
+  });
+  
+  // 페이지 로드 시 저장된 좋아요 상태 복원
+  loadLikedProducts();
+}
+
+// 좋아요 상품을 localStorage에 저장
+function addToLikedProducts(productId) {
+  let likedProducts = JSON.parse(localStorage.getItem('likedProducts') || '[]');
+  if (!likedProducts.includes(productId)) {
+    likedProducts.push(productId);
+    localStorage.setItem('likedProducts', JSON.stringify(likedProducts));
+  }
+}
+
+// 좋아요 상품을 localStorage에서 제거
+function removeFromLikedProducts(productId) {
+  let likedProducts = JSON.parse(localStorage.getItem('likedProducts') || '[]');
+  likedProducts = likedProducts.filter(id => id !== productId);
+  localStorage.setItem('likedProducts', JSON.stringify(likedProducts));
+}
+
+// 저장된 좋아요 상태 복원
+function loadLikedProducts() {
+  const likedProducts = JSON.parse(localStorage.getItem('likedProducts') || '[]');
+  
+  likedProducts.forEach(productId => {
+    const likeBtn = document.querySelector(`[data-product-id="${productId}"]`);
+    if (likeBtn) {
+      likeBtn.classList.add('liked');
+      const icon = likeBtn.querySelector('i');
+      icon.className = 'fa-solid fa-heart';
+    }
   });
 }
