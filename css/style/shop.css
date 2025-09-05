@@ -1,67 +1,60 @@
 @charset "utf-8";
 
-/* 아이디 영역 */
+/* 메인페이지 + 서브페이지 공통영역 */
+  /* 탑 + 헤더 + 컨테이너 + 로우 + 푸터 공통 */
+
 #top{
   width: 100%;
-  background-color: var(--point-color);
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  opacity: 1;
-  visibility: visible;
-  transition: opacity 0.3s ease, visibility 0.3s ease;
+  /* height: auto; */
 }
-#top.hide{
-  opacity: 0;
-  visibility: hidden;
-}
-
 #header{
   width: 100%;
-  position: fixed;
-  top: clamp(20px, 2.1vw, 40px);
-  background-color: var(--bg-color);
-  padding: clamp(10px, 2vw, 20px)
-           clamp(20px, 3vw, 40px);
-  transition: top 0.3s ease;
-  z-index: 100;
+  /* height: auto; */  
 }
 
 #main{
-  /* padding-top: clamp(50px, 8vw, 110px); */
-}
-
-/* #shop_nav 스타일은 .shop_nav로 통합됨 */
-
-#shop_light,
-#shop_deco,
-#shop_fabric,
-#shop_flower{
-  width: 100%;
-  height: auto;
+  padding-top: 160px;
+  /* .top 높이 (40px + .header 높이 = ( 로고높이 80px + 패딩 위아래 40px)) */
 }
 
 #footer{
   width: 100%;
   background-color: var(--main-color);
-  /* margin-top: clamp(40px, 5vw, 50px); */
 }
 
 /* 컨테이너 영역 */
 .container{
   margin: 0 auto;
   width: auto;
-  height: inherit;
   max-width: 1280px;
+  height: inherit;
   position: relative;
-  /* background-color: rgba(255, 0, 0, 0.1); */
 }
 .row{
   padding: 0 clamp(10px, 2vw, 20px);
 }
 
-/* top_title 영역 */
+/* top 영역 ------------------------------------------------------------*/
+.top{
+  width: 100%;
+  height: 40px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  opacity: 1;
+  visibility: visible;
+  background-color: var(--point-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+.top.hide{
+  opacity: 0;
+  visibility: hidden;
+}
+
 .top_title{
   width: 100%;
   height: auto;
@@ -74,13 +67,19 @@
   color: var(--text1-color);
 }
 
-/* header 영역 */
+/* header 영역 ------------------------------------------------------------*/
 .header{
   width: 100%;
-  height: auto;
+  height: 120px;
+  position: fixed;
+  top: 40px;
+  left: 0;
+  padding: 20px 50px;
+  z-index: 99;
   display: flex;
   justify-content: space-between;
   align-items: end;
+  background-color: var(--bg-color);
 }
 .header::after{
   content: "";
@@ -91,6 +90,7 @@
   height: 1px;
   background-color: var(--text1-color);
 }
+
 
 .nav{
   /* margin-left: clamp(10px, 2vw, 20px); */
@@ -115,7 +115,7 @@
 }
 .nav .bar_menu .sub_menu{
   position: absolute;
-  top: 110%;
+  top: 150%;
   left: 0;
   width: 180px;
   background-color: var(--bg-color2);
@@ -826,10 +826,24 @@
   padding-top: clamp(10px, 3vw, 43px);
 }
 
-/* Shop 페이지 전용 스타일 */
 
 
-/* shop_nav 영역 ----------------------------------------*/
+
+
+/* ----------------------------------------- */
+/* -----shop 서브페이지 아이디 영역----- */
+/* ----------------------------------------- */
+#shop_light,
+#shop_deco,
+#shop_fabric,
+#shop_flower{
+  width: 100%;
+  height: auto;
+}
+
+/* ----------------------------------------- */
+/* -----shop 서브페이지 클래스 영역----- */
+/* ----------------------------------------- */
 .shop_nav{
   width: 100%;
   height: auto;

@@ -6,36 +6,43 @@
   }
 }
 
-/* top 영역 */
+@media (max-width: 1080px){
+  .header{
+    height: 100px;
+    padding: 0 50px 10px 50px;
+  }
+
+  #main{
+    padding-top: 140px;
+  }
+}
+@media (max-width: 960px){
+  .top{
+    height: 30px;
+  }
+  .header{
+    height: 80px;
+    top: 30px;
+    padding: 0 50px 10px 50px;
+  }
+  #main{
+    padding-top: 110px;
+  }
+}
 @media (max-width: 768px) {
   html, body {
     margin: 0;
     padding: 0;
     overflow-x: hidden;
   }
-  
-  #top {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100vw;
-    z-index: 100;
+  .header{
+    height: 70px;
+    top: 30px;
+    padding: 0 50px 10px 50px;
   }
-  
-  #header {
-    position: fixed;
-    top: clamp(20px, 2.1vw, 40px);
-    left: 0;
-    right: 0;
-    width: 100vw;
-    z-index: 100;
+  #main{
+    padding-top: 100px;
   }
-  
-  #main {
-    padding-top: clamp(80px, 12vw, 165px);
-  }
-
   .nav .bar_menu .sub_menu {
     width: 150px;
   }
@@ -77,27 +84,16 @@
     padding: 0;
     overflow-x: hidden;
   }
-  
-  #top {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100vw;
-    z-index: 100;
+  .top{
+    height: 20px;
   }
-  
-  #header {
-    position: fixed;
-    top: clamp(20px, 2.1vw, 40px);
-    left: 0;
-    right: 0;
-    width: 100vw;
-    z-index: 100;
+  .header{
+    height: 60px;
+    top: 20px;
+    padding: 0 20px 10px 20px;
   }
-  
-  #main {
-    padding-top: clamp(80px, 12vw, 165px);
+  #main{
+    padding-top: 80px;
   }
 
   .nav .bar_menu .sub_menu {
@@ -159,6 +155,15 @@
 }
 
 @media (max-width: 320px) {
+
+  .header{
+    height: 50px;
+    top: 20px;
+    padding: 0 15px 10px 15px;
+  }
+  #main{
+    padding-top: 70px;
+  }
   /* 검색 팝업창 초소형 화면 대응 */
   .search_container {
     width: 95%;

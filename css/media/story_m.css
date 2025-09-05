@@ -1,14 +1,42 @@
 @charset "utf-8";
 
-/* 공통 스타일 미디어 쿼리 */
+/* ------------------------------------------------------------------------ */
+/* 탑 + 헤더 + 컨테이너 + 로우 + 푸터 공통------------------------------------- */
+/* ------------------------------------------------------------------------ */
 
 @media (max-width: 1290px) {
   .container{
     width: 100%;
   }
 }
+@media (max-width: 1080px){
+  .header{
+    height: 100px;
+    padding: 0 50px 10px 50px;
+  }
 
-/* top 영역 */
+  #main{
+    padding-top: 140px;
+  }
+}
+@media (max-width: 960px){
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  .top{
+    height: 30px;
+  }
+  .header{
+    height: 80px;
+    top: 30px;
+    padding: 0 50px 10px 50px;
+  }
+  #main{
+    padding-top: 110px;
+  }
+}
 @media (max-width: 768px) {
   html, body {
     margin: 0;
@@ -16,26 +44,13 @@
     overflow-x: hidden;
   }
   
-  #top {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100vw;
-    z-index: 100;
+  .header{
+    height: 70px;
+    top: 30px;
+    padding: 0 50px 10px 50px;
   }
-  
-  #header {
-    position: fixed;
-    top: clamp(20px, 2.1vw, 40px);
-    left: 0;
-    right: 0;
-    width: 100vw;
-    z-index: 100;
-  }
-  
-  #main {
-    padding-top: clamp(80px, 12vw, 165px);
+  #main{
+    padding-top: 100px;
   }
 
   .nav .bar_menu .sub_menu {
@@ -49,6 +64,29 @@
     padding: 8px 15px;
     font-size: 14px;
   }
+
+
+  /* 검색 팝업창 모바일 대응 */
+  .search_container {
+    width: 95%;
+    margin: 20px;
+  }
+  .search_header {
+    padding: 20px 25px 15px;
+  }
+  .search_input_area {
+    padding: 25px;
+    gap: 12px;
+  }
+  .search_input {
+    padding: 12px 18px;
+  }
+  .search_submit {
+    padding: 12px 18px;
+  }
+  .search_suggestions {
+    padding: 0 25px 25px;
+  }
 }
 @media (max-width: 480px) {
   html, body {
@@ -56,27 +94,16 @@
     padding: 0;
     overflow-x: hidden;
   }
-  
-  #top {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100vw;
-    z-index: 100;
+  .top{
+    height: 20px;
   }
-  
-  #header {
-    position: fixed;
-    top: clamp(20px, 2.1vw, 40px);
-    left: 0;
-    right: 0;
-    width: 100vw;
-    z-index: 100;
+  .header{
+    height: 60px;
+    top: 20px;
+    padding: 0 20px 10px 20px;
   }
-  
-  #main {
-    padding-top: clamp(80px, 12vw, 165px);
+  #main{
+    padding-top: 80px;
   }
 
   .nav .bar_menu .sub_menu {
@@ -91,6 +118,23 @@
     font-size: 13px;
   }
 }
+@media (max-width: 320px) {
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  .header{
+    height: 50px;
+    top: 20px;
+    padding: 0 15px 10px 15px;
+  }
+  #main{
+    padding-top: 70px;
+  }
+}
+
 
 /* footer 영역 */
 @media (max-width: 1280px) {
@@ -155,7 +199,62 @@
   }
 }
 
-/* Brand story 페이지 전용 미디어 쿼리 */
+/* ------------------------------------------------------------------------ */
+/* 스토리 서브페이지 전용 미디어 ---------------------------------------------- */
+/* ------------------------------------------------------------------------ */
+
+@media (max-width: 768px) {
+  #story {
+    height: auto;
+    padding: 40px 0 0 0;
+  }
+  
+  .brand_story_area {
+  }
+  
+  .brand_story_photo_area {
+    height: 300px;
+    padding: 0;
+  }
+  
+  .brand_story_photo_area::before {
+    display: none;
+  }
+  
+  .brand_story_photo_area .story_image {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .brand_story_photo_area .story_image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 100% 50%;
+  }
+  
+  .story_heading {
+    font-size: 24px;
+  }
+  
+  .story_title {
+    font-size: 28px;
+    margin-bottom: 30px;
+  }
+  
+  .story_text p {
+    font-size: 16px;
+  }
+  
+  .value_content {
+    padding: 30px;
+  }
+  
+  .value_heading {
+    font-size: 24px;
+    margin-bottom: 25px;
+  }
+}
 
 
 
