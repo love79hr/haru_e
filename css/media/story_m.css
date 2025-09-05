@@ -9,7 +9,7 @@
     width: 100%;
   }
 }
-@media (max-width: 1080px){
+@media (max-width: 1080px) {
   .header{
     height: 100px;
     padding: 0 50px 10px 50px;
@@ -19,7 +19,7 @@
     padding-top: 140px;
   }
 }
-@media (max-width: 960px){
+@media (max-width: 960px) {
   html, body {
     margin: 0;
     padding: 0;
