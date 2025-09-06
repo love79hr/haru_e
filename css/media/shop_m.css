@@ -9,7 +9,6 @@
     width: 100%;
   }
 }
-
 @media (max-width: 1080px){
   .header{
     height: 100px;
@@ -419,10 +418,16 @@
   .shop_nav .nav_list .nav_box ul{
     display: none !important;
   }
-
+  .c_title h2.shop_h2{
+    padding-left: 20px;
+  }
+  .c_title p{
+    padding-left: 20px;
+  }
   .c_title p::after{
     bottom: -5px;
     height: 100%;
+    left: 20px;
   }
 
   .c_list{
@@ -447,11 +452,16 @@
   }
   .c_title h2.shop_h2{
     font-size: 16px;
+    padding-left: 0;
   }  
   .c_title p{
     font-size: 11px;
     display: block;
     text-align: center;
+    padding-left: 0;
+  }
+  .c_title p::after{
+    left: 0;
   }
   .c_list{
     padding: 20px 20px 50px 20px;
