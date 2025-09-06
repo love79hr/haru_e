@@ -1233,6 +1233,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // review.html 페이지에서만 실행
   if (window.location.pathname.includes('review.html')) {
     initReviewSwiper();
+    initReviewMoreButtons();
   }
 });
 
@@ -1264,4 +1265,67 @@ function initReviewSwiper() {
       },
     });
   }
+}
+
+// ========================================
+// Review 페이지 전용 More 버튼 기능
+// ========================================
+
+function initReviewMoreButtons() {
+  const moreButtons = document.querySelectorAll('.review_box a.more');
+  
+  // 플로팅 썸네일 컨테이너 생성
+  const floatingThumbnail = document.createElement('div');
+  floatingThumbnail.className = 'floating-thumbnail';
+  document.body.appendChild(floatingThumbnail);
+  
+  moreButtons.forEach(btn => {
+    // 마우스 오버 이벤트
+    btn.addEventListener('mouseenter', function(e) {
+      const buttonClass = this.classList[1];
+      const thumbnailMap = {
+        'btn1': 'https://github.com/love79hr/haru_e/blob/main/images/fabric_02.png?raw=true',
+        'btn2': 'https://github.com/love79hr/haru_e/blob/main/images/flower_10.png?raw=true',
+        'btn3': 'https://github.com/love79hr/haru_e/blob/main/images/light_04.png?raw=true',
+        'btn4': 'https://github.com/love79hr/haru_e/blob/main/images/deco_05.png?raw=true'
+      };
+      
+      const thumbnailSrc = thumbnailMap[buttonClass];
+      if (thumbnailSrc) {
+        floatingThumbnail.innerHTML = `<img src="${thumbnailSrc}" alt="상품 썸네일">`;
+        floatingThumbnail.classList.add('show');
+      }
+    });
+    
+    // 마우스 아웃 이벤트
+    btn.addEventListener('mouseleave', function() {
+      floatingThumbnail.classList.remove('show');
+    });
+    
+    // 마우스 움직임 이벤트
+    btn.addEventListener('mousemove', function(e) {
+      floatingThumbnail.style.left = (e.clientX + 20) + 'px';
+      floatingThumbnail.style.top = (e.clientY - 20) + 'px';
+    });
+    
+    // 클릭 이벤트 (기존 기능 유지)
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      
+      const sectionMap = {
+        'btn1': 'shop_fabric',
+        'btn2': 'shop_flower',
+        'btn3': 'shop_light',
+        'btn4': 'shop_deco'
+      };
+      
+      const buttonClass = this.classList[1];
+      const targetSection = sectionMap[buttonClass];
+      
+      if (targetSection) {
+        window.location.href = `./shop.html#${targetSection}`;
+        console.log(`${buttonClass} 클릭 - ${targetSection} 섹션으로 이동`);
+      }
+    });
+  });
 }

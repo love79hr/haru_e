@@ -950,6 +950,7 @@
 .review_sub_swiper .swiper-wrapper{
   width: 100%;
   height: auto;
+  overflow: hidden;
 }
 .review_sub_swiper .swiper-slide{
   height: auto;
@@ -1004,11 +1005,11 @@
   overflow: hidden;
 }
 .review_box .review_img img{
-  transform: scale(1);
-  transition: all 0.3s ease;
+  /* transform: scale(1);
+  transition: all 0.3s ease; */
 }
 .review_box .review_img:hover img{
-  transform: scale(1.1);
+  /* transform: scale(1.1); */
 }
 .review_box .review_txt{
   width: 100%;
@@ -1039,6 +1040,7 @@
   font-size: clamp(12px, 2vw, 18px);
   font-family: 'NanumSquareNeoBold';
   line-height: 160%;
+  word-break: break-all;
 }
 
 .review_box a.more{
@@ -1072,4 +1074,35 @@ a.more.btn4{
 .review_box a.more i{
   color: #DD3636;
   font-size: clamp(18px, 3vw, 26px);
+}
+
+/* 플로팅 썸네일 컨테이너 */
+.floating-thumbnail {
+  position: fixed;
+  width: clamp(100px, 20vw, 150px);
+  height: clamp(100px, 20vw, 150px);
+  background: var(--bg-color);
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(75, 59, 56,0.5);
+  z-index: 9999;
+  opacity: 0;
+  transform: scale(0.8);
+  transition: all 0.3s ease;
+  pointer-events: none;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.floating-thumbnail.show {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.floating-thumbnail img {
+  width: 90%;
+  height: 90%;
+  border-radius: 10px;
+  object-fit: cover;
 }
