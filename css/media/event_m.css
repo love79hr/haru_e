@@ -473,7 +473,10 @@
   .event_banner_text .text_box{
     width: 100%;
     left: 3%;
-  }  
+  }
+  .event_list ul.text li{
+    padding: 3% 0;
+  }
   .event_img ul.img{
     height: 570px;
   }
