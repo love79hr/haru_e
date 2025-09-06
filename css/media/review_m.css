@@ -312,21 +312,36 @@
   /* Swiper 네비게이션 320px 대응 */
   .review_sub_swiper .swiper-button-next,
   .review_sub_swiper .swiper-button-prev {
-    width: 30px;
-    height: 30px;
+    width: 35px;
+    height: 35px;
+    border-width: 1px;
   }
   
   .review_sub_swiper .swiper-button-next {
-    right: 5px;
+    right: 10px;
   }
   
   .review_sub_swiper .swiper-button-prev {
-    left: 5px;
+    left: 10px;
   }
   
   .review_sub_swiper .swiper-button-next::after,
   .review_sub_swiper .swiper-button-prev::after {
-    font-size: 14px;
+    font-size: 12px;
+  }
+  
+  /* 320px에서 Swiper 안정성 개선 */
+  .review_sub_cont {
+    margin: 5% 0;
+  }
+  
+  .review_sub_swiper {
+    padding: 0 5px;
+  }
+  
+  .review_sub_swiper .swiper-slide {
+    width: 100% !important;
+    flex-shrink: 0;
   }
 }
 

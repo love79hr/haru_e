@@ -945,6 +945,7 @@
   width: 100%;
   height: auto;
   overflow: hidden;
+  position: relative;
 }
 .review_sub_swiper .swiper-wrapper{
   width: 100%;
