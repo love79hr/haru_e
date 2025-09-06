@@ -1453,6 +1453,7 @@
   padding: 0 0 clamp(40px, 5vw, 50px) 0;
 }
 .best_review .h1{}
+
 .best_review .review_swiper{
   width: 100%;
   height: auto;
@@ -1557,7 +1558,6 @@
   color: var(--point-color);
   background-color: var(--bg-color2);
   border-radius: 50%;
-  opacity: 0.7;
   transition: all 0.3s ease;
   /* box-shadow: 0 5px 15px rgba(75, 59, 56, 0.2); */
   z-index: 9999;

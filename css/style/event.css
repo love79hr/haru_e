@@ -15,6 +15,8 @@
 #main{
   padding-top: 160px;
   /* .top 높이 (40px + .header 높이 = ( 로고높이 80px + 패딩 위아래 40px)) */
+  height: auto;
+  /* background-color: lightpink; */
 }
 
 #footer{
@@ -29,6 +31,7 @@
   max-width: 1280px;
   height: inherit;
   position: relative;
+  /* background-color: rgba(255,0,0,0.1); */
 }
 .row{
   padding: 0 clamp(10px, 2vw, 20px);
@@ -179,6 +182,7 @@
 .logo{
   width: auto;
   height: auto;
+  transform: translateY(15%);
 }
 .logo a{
   display: inline-block;
@@ -189,16 +193,18 @@
 .logo h1{
   display: inline-block;
   margin-left: 0;
-  font-family: 'NanumSquareNeoHeavy';
-  font-size: clamp(18px, 2vw, 28px);
+  font-family: var(--mainEng-font);
+  font-size: clamp(20px, 2vw, 30px);
   color: var(--point-color);
-  transform: translateY(-5%);
+  transform: translate(15%, -5%);
 }
 
 .user{}
 .user ul{
+  width: clamp(55px, 10vw, 110px);
   display: flex;
-  gap: clamp(13px, 2vw, 30px);
+  justify-content: space-between;
+  align-items: end;
 }
 .user ul li{
   width: auto;
@@ -876,9 +882,183 @@
 /* ---------이벤트 서브페이지 아이디 영역--------- */
 /* ----------------------------------------- */
 
+#event_banner{
+  width: 100%;
+  /* height: 200px; */
+}
+#event_cont{
+  width: 100%;
+}
 
 
 /* ----------------------------------------- */
 /* -----이벤트 스토리 서브페이지 클래스 영역------ */
 /* ----------------------------------------- */
 
+/* event_banner 영역 */
+.event_banner{
+  width: 100%;
+  height: 200px;
+  position: relative;
+}
+.event_banner img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center center;
+}
+
+.event_banner_text{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: -100%;
+  left: 0;
+  color: var(--text2-color);
+  z-index: 3;
+}
+.event_banner_text .text_box{
+  width: 50%;
+  height: auto;
+  position: absolute;
+  left: 6%;
+  bottom: 0;
+  word-break: keep-all;
+  /* background-color: aquamarine; */
+}
+.text_box h2{
+  font-family: 'NanumSquareNeoExtraBold';
+  font-size: clamp(18px, 2vw, 30px);
+  margin-bottom: 1.5%;
+  color: var(--text2-color);
+}
+.text_box p{
+  font-family: 'NanumSquareNeo';
+  font-size: clamp(12px, 2vw, 16px);
+  color: var(--text2-color);
+  margin-bottom: 4%;
+}
+
+
+/* event_cont 영역 */
+.event_cont{
+  width: 100%;
+  height: auto;
+  padding: 5% 0;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+/* 화면 왼쪽 이벤트 탭메뉴 영역 */
+
+.event_list{
+  width: 40%;
+  /* background-color: aqua; */
+}
+.event_list ul.text{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--text1-color);
+}
+.event_list ul.text li{
+  width: 100%;
+  padding: 4% 3%;
+  border-bottom: 1px solid var(--text1-color);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.event_list ul.text li::before {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 0%;
+  background-color: var(--sub2-color);
+  transition: height 0.3s ease;
+  z-index: -1;
+}
+.event_list ul.text li:hover::before {
+  height: 100%;
+}
+.event_list ul.text li.active{
+  background-color: var(--sub2-color);
+}
+
+.event_list ul.text li a{
+  display: block;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.event_list ul.text li a h3{
+  width: 40%;
+  display: inline-block;
+  /* background-color: limegreen; */
+  font-size: 18px;
+  word-break: keep-all;
+  line-height: 1.4;
+}
+.event_list ul.text li a strong{
+  width: 40%;
+  display: inline-block;
+  font-size: 18px;
+  word-break: keep-all;
+  line-height: 1.4;
+  /* background-color: lightcoral; */
+}
+.event_list ul.text li a span{
+  width: 20%;
+  display: inline-block;
+  text-align: right;
+  font-size: 14px;
+  word-break: keep-all;
+  line-height: 1.4;
+  /* background-color: lightseagreen; */
+}
+
+.event_list ul.text li.active{}
+.event_list ul.text li.active a h3,
+.event_list ul.text li.active a strong,
+.event_list ul.text li.active a span{
+  font-family: 'NanumSquareNeoExtraBold';
+}
+
+
+/* 화면 오른쪽 이벤트 이미지 영역 */
+
+.event_contbox{
+  width: 58%;
+}
+.event_img{
+  width: 100%;
+}
+.event_img ul.img{
+  width: 100%;
+  height: 850px;
+  /* border: 1px solid var(--sub2-color); */
+  /* padding-top: 5%; */
+  /* background-color: #fff; */
+  position: relative;
+}
+.event_img ul.img li{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  opacity: 0;
+  visibility: hidden;
+  position: absolute;
+  /* background-color: aquamarine; */
+}
+.event_img ul.img li img{
+  width: 600px;
+}
+.event_img ul.img li.active{
+  opacity: 1;
+  visibility: visible;
+}

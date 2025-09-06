@@ -347,8 +347,8 @@ document.addEventListener('DOMContentLoaded', function () {
     shortcutBtn.addEventListener('click', function (e) {  // 버튼 클릭 이벤트 핸들러
       e.preventDefault(); // 기본 동작 방지
       // TODO: 실제 이벤트 페이지로 이동하는 로직 구현
-      alert('이벤트 페이지로 이동합니다!'); // 이벤트 페이지로 이동합니다!
-      // 예시: window.location.href = '/event-page';
+      // alert('이벤트 페이지로 이동합니다!'); // 이벤트 페이지로 이동합니다!
+      window.location.href = './event.html';
     });
   }
 });
@@ -362,83 +362,86 @@ document.addEventListener('DOMContentLoaded', function () {
  * 리뷰 섹션의 이미지 슬라이더를 설정하고 자동 재생 기능을 활성화합니다.
  * Swiper 라이브러리가 로드되지 않은 경우 오류를 출력하고 실행을 중단합니다.
  */
-document.addEventListener('DOMContentLoaded', function() { // Swiper 슬라이더 초기화 함수
-  // Swiper 요소가 있는 페이지에서만 실행 (리뷰 페이지 등)
-  const swiperElement = document.querySelector('.review_swiper'); // Swiper 요소
-  if (swiperElement) { // Swiper 요소가 있는 페이지에서만 실행 (리뷰 페이지 등)
-    console.log('Swiper 초기화 시작'); // Swiper 초기화 시작
-    
-    // Swiper CDN 라이브러리가 로드되었는지 확인
-    if (typeof Swiper === 'undefined') { // Swiper 라이브러리가 로드되지 않았다면 오류를 출력하고 실행을 중단
-      console.error('Swiper 라이브러리가 로드되지 않았습니다'); // Swiper 라이브러리가 로드되지 않았다면 오류를 출력하고 실행을 중단
-      return; // 실행을 중단
-    }
-    
-    try { // Swiper 인스턴스 생성 및 설정
-      /**
-       * Swiper 인스턴스 생성 및 설정
-       * 리뷰 슬라이더의 동작 방식을 정의합니다.
-       */
-      const reviewSwiper = new Swiper('.review_swiper', { // Swiper 인스턴스 생성 및 설정
-        slidesPerView: 1,        // 한 번에 보여줄 슬라이드 개수
-        spaceBetween: 125,       // 슬라이드 간 간격 (px)
-        centeredSlides: true,    // 슬라이드를 중앙 정렬
-        loop: true,              // 무한 루프 활성화
-        
-        // 자동 재생 설정
-        autoplay: {
-          delay: 5000,                    // 5초마다 슬라이드 변경
-          disableOnInteraction: false,    // 사용자 상호작용 후에도 자동재생 유지
-        },
-        
-        // 페이지네이션 (하단 점 표시) 설정
-        pagination: {
-          el: '.swiper-pagination',       // 페이지네이션 컨테이너
-          clickable: true,                // 블릿 클릭으로 슬라이드 이동 가능
-          type: 'bullets',                // 블릿 형태의 페이지네이션
-          renderBullet: function (index, className) { // 블릿 형태의 페이지네이션
-            return '<span class="' + className + '"></span>'; // 블릿 형태의 페이지네이션
-          },
-        },
-        
-        // 네비게이션 버튼 (이전/다음) 설정
-        navigation: {
-          nextEl: '.swiper-button-next',  // 다음 버튼 요소
-          prevEl: '.swiper-button-prev',  // 이전 버튼 요소
-        },
-      });
-      
-      console.log('Swiper 초기화 완료');
-      
-      /**
-       * Swiper 인스턴스 생성 확인 및 페이지네이션 표시
-       * 초기화가 성공적으로 완료되었는지 확인하고 페이지네이션을 표시합니다.
-       */
-      if (reviewSwiper) { // Swiper 인스턴스 생성되었는지 확인
-        console.log('Swiper 인스턴스 생성됨'); // Swiper 인스턴스 생성됨
-        console.log('페이지네이션 요소:', reviewSwiper.pagination.el); // 페이지네이션 요소
-        
-        /**
-         * 페이지네이션 표시 처리
-         * 300ms 지연 후 페이지네이션을 시각적으로 표시합니다.
-         */
-        setTimeout(() => { // 300ms 지연 후 페이지네이션을 시각적으로 표시
-          const pagination = document.querySelector('.swiper-pagination'); // 페이지네이션 요소
-          
-          if (pagination) { // 페이지네이션 요소가 있는지 확인
-            pagination.style.display = 'block'; // 페이지네이션 표시
-            pagination.style.opacity = '1'; // 페이지네이션 표시
-            pagination.style.visibility = 'visible'; // 페이지네이션 표시
-            console.log('페이지네이션 스타일 적용됨');
-          }
-        }, 300);
+document.addEventListener('DOMContentLoaded', function () { // Swiper 슬라이더 초기화 함수
+  // index.html 페이지에서만 실행
+  if (window.location.pathname.includes('index.html')) {
+    const swiperElement = document.querySelector('.review_swiper'); // Swiper 요소
+    if (swiperElement) { // Swiper 요소가 있는 페이지에서만 실행 (리뷰 페이지 등)
+      console.log('Swiper 초기화 시작'); // Swiper 초기화 시작
+
+      // Swiper CDN 라이브러리가 로드되었는지 확인
+      if (typeof Swiper === 'undefined') { // Swiper 라이브러리가 로드되지 않았다면 오류를 출력하고 실행을 중단
+        console.error('Swiper 라이브러리가 로드되지 않았습니다'); // Swiper 라이브러리가 로드되지 않았다면 오류를 출력하고 실행을 중단
+        return; // 실행을 중단
       }
-    } catch (error) { // Swiper 초기화 오류
-      console.error('Swiper 초기화 오류:', error);
+
+      try { // Swiper 인스턴스 생성 및 설정
+        /**
+         * Swiper 인스턴스 생성 및 설정
+         * 리뷰 슬라이더의 동작 방식을 정의합니다.
+         */
+        const reviewSwiper = new Swiper('.review_swiper', { // Swiper 인스턴스 생성 및 설정
+          slidesPerView: 1,        // 한 번에 보여줄 슬라이드 개수
+          spaceBetween: 125,       // 슬라이드 간 간격 (px)
+          centeredSlides: true,    // 슬라이드를 중앙 정렬
+          loop: true,              // 무한 루프 활성화
+
+          // 자동 재생 설정
+          autoplay: {
+            delay: 5000,                    // 5초마다 슬라이드 변경
+            disableOnInteraction: false,    // 사용자 상호작용 후에도 자동재생 유지
+          },
+
+          // 페이지네이션 (하단 점 표시) 설정
+          pagination: {
+            el: '.swiper-pagination',       // 페이지네이션 컨테이너
+            clickable: true,                // 블릿 클릭으로 슬라이드 이동 가능
+            type: 'bullets',                // 블릿 형태의 페이지네이션
+            renderBullet: function (index, className) { // 블릿 형태의 페이지네이션
+              return '<span class="' + className + '"></span>'; // 블릿 형태의 페이지네이션
+            },
+          },
+
+          // 네비게이션 버튼 (이전/다음) 설정
+          navigation: {
+            nextEl: '.swiper-button-next',  // 다음 버튼 요소
+            prevEl: '.swiper-button-prev',  // 이전 버튼 요소
+          },
+        });
+
+        console.log('Swiper 초기화 완료');
+
+        /**
+         * Swiper 인스턴스 생성 확인 및 페이지네이션 표시
+         * 초기화가 성공적으로 완료되었는지 확인하고 페이지네이션을 표시합니다.
+         */
+        if (reviewSwiper) { // Swiper 인스턴스 생성되었는지 확인
+          console.log('Swiper 인스턴스 생성됨'); // Swiper 인스턴스 생성됨
+          console.log('페이지네이션 요소:', reviewSwiper.pagination.el); // 페이지네이션 요소
+
+          /**
+           * 페이지네이션 표시 처리
+           * 300ms 지연 후 페이지네이션을 시각적으로 표시합니다.
+           */
+          setTimeout(() => { // 300ms 지연 후 페이지네이션을 시각적으로 표시
+            const pagination = document.querySelector('.swiper-pagination'); // 페이지네이션 요소
+
+            if (pagination) { // 페이지네이션 요소가 있는지 확인
+              pagination.style.display = 'block'; // 페이지네이션 표시
+              pagination.style.opacity = '1'; // 페이지네이션 표시
+              pagination.style.visibility = 'visible'; // 페이지네이션 표시
+              console.log('페이지네이션 스타일 적용됨');
+            }
+          }, 300);
+        }
+      } catch (error) { // Swiper 초기화 오류
+        console.error('Swiper 초기화 오류:', error);
+      }
+    } else {
+      console.log('Swiper 요소를 찾을 수 없습니다 - 이 페이지에서는 Swiper를 사용하지 않습니다.');
     }
-  } else {
-    console.log('Swiper 요소를 찾을 수 없습니다 - 이 페이지에서는 Swiper를 사용하지 않습니다.'); 
   }
+
 });
 
 
@@ -455,7 +458,7 @@ document.addEventListener('DOMContentLoaded', function () { // DOM이 완전히 
   // ========================================
   // 햄버거 메뉴 (bar_menu) 토글 기능
   // ========================================
-  
+
   /**
    * 햄버거 메뉴 관련 DOM 요소들 선택
    */
@@ -499,7 +502,7 @@ document.addEventListener('DOMContentLoaded', function () { // DOM이 완전히 
   // ========================================
   // 검색 팝업창 기능
   // ========================================
-  
+
   /**
    * 검색 팝업창 관련 DOM 요소들 선택
    */
@@ -518,7 +521,7 @@ document.addEventListener('DOMContentLoaded', function () { // DOM이 완전히 
     searchBtn.addEventListener('click', function (e) { // 검색 버튼 클릭 이벤트 핸들러
       e.preventDefault(); // 기본 동작 방지
       searchPopup.classList.add('active'); // 팝업창 표시
-      
+
       // 팝업이 열린 후 검색 입력창에 포커스 (애니메이션 완료 후)
       setTimeout(() => { // 300ms 지연 후 검색 입력창에 포커스
         searchInput.focus(); // 검색 입력창에 포커스
@@ -543,7 +546,7 @@ document.addEventListener('DOMContentLoaded', function () { // DOM이 완전히 
     if (searchSubmit) {
       searchSubmit.addEventListener('click', function () { // 검색 제출 버튼 클릭 이벤트 핸들러
         const searchTerm = searchInput.value.trim(); // 공백 제거된 검색어
-        
+
         if (searchTerm) {
           // TODO: 실제 검색 로직 구현
           console.log('검색어:', searchTerm);
@@ -587,7 +590,7 @@ document.addEventListener('DOMContentLoaded', function () { // DOM이 완전히 
       searchInput.addEventListener('keypress', function (e) { // 검색 입력창에서 Enter 키를 누르면 검색 실행 기능
         if (e.key === 'Enter') { // Enter 키를 누르면 검색 실행
           const searchTerm = searchInput.value.trim(); // 공백 제거된 검색어
-          
+
           if (searchTerm) { // 검색어가 있는지 확인
             // TODO: 실제 검색 로직 구현
             console.log('검색어:', searchTerm); // 검색어 출력
@@ -668,7 +671,7 @@ document.addEventListener('DOMContentLoaded', function () { // 장바구니 내�
   // ========================================
   // 수량 조절 기능 (증가/감소)
   // ========================================
-  
+
   /**
    * 수량 조절 버튼 이벤트 핸들러
    * + 버튼을 클릭하면 수량이 증가하고, - 버튼을 클릭하면 수량이 감소합니다.
@@ -696,7 +699,7 @@ document.addEventListener('DOMContentLoaded', function () { // 장바구니 내�
   // ========================================
   // 개별 상품 삭제 기능
   // ========================================
-  
+
   /**
    * 개별 상품 삭제 버튼 이벤트 핸들러
    * 삭제 버튼을 클릭하면 해당 상품이 장바구니에서 제거됩니다.
@@ -715,7 +718,7 @@ document.addEventListener('DOMContentLoaded', function () { // 장바구니 내�
   // ========================================
   // 장바구니 전체 비우기 기능
   // ========================================
-  
+
   /**
    * 장바구니 전체 비우기 버튼 이벤트 핸들러
    * 모든 상품을 장바구니에서 제거합니다.
@@ -735,7 +738,7 @@ document.addEventListener('DOMContentLoaded', function () { // 장바구니 내�
   // ========================================
   // 주문하기 기능
   // ========================================
-  
+
   /**
    * 주문하기 버튼 이벤트 핸들러
    * 주문 페이지로 이동하는 기능을 처리합니다.
@@ -751,7 +754,7 @@ document.addEventListener('DOMContentLoaded', function () { // 장바구니 내�
   // ========================================
   // 장바구니 요약 정보 업데이트 함수
   // ========================================
-  
+
   /**
    * 장바구니 요약 정보 업데이트 함수
    * 총 상품 수량과 총 금액을 계산하여 화면에 표시합니다.
@@ -790,7 +793,7 @@ document.addEventListener('DOMContentLoaded', function () { // 장바구니 내�
   // ========================================
   // 빈 장바구니 상태 체크 및 UI 업데이트 함수
   // ========================================
-  
+
   /**
    * 빈 장바구니 상태 체크 및 UI 업데이트 함수
    * 장바구니에 상품이 있는지 확인하고, 그에 따라 UI를 업데이트합니다.
@@ -802,7 +805,7 @@ document.addEventListener('DOMContentLoaded', function () { // 장바구니 내�
     const cartEmpty = document.querySelector('.cart_empty');     // 빈 장바구니 메시지
     const cartSummary = document.querySelector('.cart_summary'); // 장바구니 요약 정보
     const cartActions = document.querySelector('.cart_actions'); // 장바구니 액션 버튼들
-  
+
     // 상품이 없는 경우 - 빈 장바구니 UI 표시
     if (cartItems && cartItems.children.length === 0) {
       if (cartEmpty) cartEmpty.style.display = 'block';      // 빈 장바구니 메시지 표시
@@ -819,7 +822,7 @@ document.addEventListener('DOMContentLoaded', function () { // 장바구니 내�
   // ========================================
   // 초기 상태 설정
   // ========================================
-  
+
   /**
    * 페이지 로드 시 장바구니 상태 체크
    * 페이지가 처음 로드될 때 장바구니의 현재 상태를 확인하고 UI를 업데이트합니다.
@@ -849,7 +852,7 @@ function initShopElements() {
   shopTopElement = document.getElementById('top');           // 상단 영역
   shopHeaderElement = document.getElementById('header');     // 헤더 영역
   shopNavElement = document.querySelector('.shop_nav');      // Shop 네비게이션
-  
+
   console.log('Shop 요소 초기화:', { // Shop 요소 초기화 로그
     top: shopTopElement, // 상단 영역
     header: shopHeaderElement, // 헤더 영역
@@ -867,13 +870,13 @@ function setShopNavPosition() {
   if (!shopNavElement || !shopHeaderElement || !shopTopElement) { // Shop 요소가 없으면 다시 초기화 시도
     initShopElements(); // Shop 요소 초기화
   }
-  
+
   if (shopNavElement && shopHeaderElement && shopTopElement) { // Shop 요소가 있으면 네비게이션 위치 설정
     // top 영역과 헤더 높이를 모두 계산
     const topHeight = shopTopElement.offsetHeight;        // 상단 영역 높이
     const headerHeight = shopHeaderElement.offsetHeight;  // 헤더 높이
     const totalHeight = topHeight + headerHeight;         // 총 높이
-    
+
     // top + 헤더 높이만큼 margin-top 설정
     shopNavElement.style.marginTop = totalHeight + 'px';
     console.log('Shop - Top height:', topHeight, 'Header height:', headerHeight, 'Total margin-top:', shopNavElement.style.marginTop);
@@ -903,10 +906,10 @@ function initShopPage() { // Shop 페이지 전용 초기화 함수
 function initShopNavigation() { // Shop 페이지 네비게이션 기능 초기화 함수
   // 요소 초기화 먼저 실행
   initShopElements(); // DOM 요소들 초기화
-  
+
   // shop nav 클릭 이벤트 관련 요소들 선택
   const navBoxes = document.querySelectorAll('.shop_nav .nav_list .nav_box'); // Shop 네비게이션 박스들
-  
+
   /**
    * 카테고리별 섹션 매핑 객체
    * 네비게이션 텍스트와 실제 섹션 ID를 연결합니다.
@@ -923,23 +926,23 @@ function initShopNavigation() { // Shop 페이지 네비게이션 기능 초기�
    * 네비게이션을 클릭하면 해당 카테고리 섹션으로 부드럽게 스크롤됩니다.
    */
   navBoxes.forEach(navBox => { // Shop 네비게이션 박스들 반복문 처리
-    navBox.addEventListener('click', function() { // Shop 네비게이션 박스 클릭 이벤트 핸들러
+    navBox.addEventListener('click', function () { // Shop 네비게이션 박스 클릭 이벤트 핸들러
       const h3Text = this.querySelector('h3').textContent.trim(); // 클릭된 네비게이션의 텍스트
       const targetSection = sections[h3Text]; // 해당하는 섹션 요소
-      
+
       if (targetSection) {
         // 모든 nav_box에서 click 클래스 제거 (선택 상태 초기화)
         navBoxes.forEach(box => box.classList.remove('click'));
-        
+
         // 클릭된 nav_box에 click 클래스 추가 (선택 상태 표시)
         this.classList.add('click');
-        
+
         // 해당 섹션으로 스크롤 위치 계산
         const headerHeight = shopHeaderElement ? shopHeaderElement.offsetHeight : 0;  // 헤더 높이
         const shopNavHeight = shopNavElement ? shopNavElement.offsetHeight : 0;        // 네비게이션 높이
         const sectionTop = targetSection.offsetTop;                                    // 섹션 상단 위치
         const scrollPosition = sectionTop - headerHeight - shopNavHeight - 20;        // 20px 여백 추가
-        
+
         // 부드러운 스크롤로 해당 위치로 이동
         window.scrollTo({ // 부드러운 스크롤로 해당 위치로 이동
           top: scrollPosition, // 스크롤 위치
@@ -953,7 +956,7 @@ function initShopNavigation() { // Shop 페이지 네비게이션 기능 초기�
    * 스크롤 시 활성 섹션 하이라이트 기능
    * 사용자가 스크롤할 때 현재 보이는 섹션에 맞는 네비게이션을 자동으로 하이라이트합니다.
    */
-  window.addEventListener('scroll', function() { // 스크롤 이벤트 핸들러
+  window.addEventListener('scroll', function () { // 스크롤 이벤트 핸들러
     const headerHeight = shopHeaderElement ? shopHeaderElement.offsetHeight : 0;  // 헤더 높이
     const shopNavHeight = shopNavElement ? shopNavElement.offsetHeight : 0;      // 네비게이션 높이
     const scrollPosition = window.scrollY + headerHeight + shopNavHeight + 50;   // 고정된 요소들 고려한 오프셋
@@ -963,12 +966,12 @@ function initShopNavigation() { // Shop 페이지 네비게이션 기능 초기�
       if (section) { // 섹션이 있는지 확인
         const sectionTop = section.offsetTop;                    // 섹션 상단 위치
         const sectionBottom = sectionTop + section.offsetHeight; // 섹션 하단 위치
-        
+
         // 현재 스크롤 위치가 이 섹션 범위 내에 있는지 확인
         if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
           // 해당 섹션에 맞는 nav_box 찾기
           const sectionTitle = section.id.replace('shop_', ''); // 섹션 ID에서 'shop_' 제거
-          
+
           /**
            * 섹션 ID와 네비게이션 텍스트 매핑 객체
            */
@@ -978,12 +981,12 @@ function initShopNavigation() { // Shop 페이지 네비게이션 기능 초기�
             'fabric': '패브릭 소품',
             'flower': '플라워 / 그린'
           };
-          
+
           const title = titleMap[sectionTitle]; // 섹션 ID에 맞는 네비게이션 텍스트
           if (title) { // 네비게이션 텍스트가 있는지 확인
             // 모든 nav_box에서 click 클래스 제거 (선택 상태 초기화)
             navBoxes.forEach(box => box.classList.remove('click'));
-            
+
             // 해당 nav_box에 click 클래스 추가 (선택 상태 표시)
             const targetNavBox = Array.from(navBoxes).find(box => // 해당 nav_box에 click 클래스 추가 (선택 상태 표시)
               box.querySelector('h3').textContent.trim() === title // 네비게이션 텍스트가 일치하는지 확인
@@ -1006,23 +1009,23 @@ function initShopNavigation() { // Shop 페이지 네비게이션 기능 초기�
 function initFloatingButtons() { // 플로팅 버튼 기능 초기화 함수
   // 요소 초기화 먼저 실행
   initShopElements(); // DOM 요소들 초기화
-  
+
   const floatingButtons = document.querySelectorAll('.floating_btn');        // 플로팅 버튼들
   const floatingContainer = document.querySelector('.shop_floating_buttons'); // 플로팅 버튼 컨테이너
-  
+
   // 플로팅 버튼이 없으면 실행하지 않음
   if (floatingButtons.length === 0) { // 플로팅 버튼이 없으면 실행하지 않음
     console.log('플로팅 버튼을 찾을 수 없습니다.');
     return;
   }
-  
+
   /**
    * 스크롤 이벤트로 플로팅 버튼 보이기/숨기기 기능
    * 300px 이상 스크롤하면 플로팅 버튼들이 나타나고, 그 미만이면 숨겨집니다.
    */
-  window.addEventListener('scroll', function() { // 스크롤 이벤트 핸들러
+  window.addEventListener('scroll', function () { // 스크롤 이벤트 핸들러
     const scrollTop = window.scrollY; // 현재 스크롤 위치
-    
+
     if (scrollTop > 300) { // 300px 이상 스크롤하면 보이기
       if (floatingContainer) { // 플로팅 버튼 컨테이너가 있는지 확인
         floatingContainer.classList.add('show'); // 플로팅 버튼 컨테이너에 show 클래스 추가
@@ -1033,15 +1036,15 @@ function initFloatingButtons() { // 플로팅 버튼 기능 초기화 함수
       }
     }
   });
-  
+
   /**
    * 플로팅 버튼 클릭 이벤트 핸들러
    * 각 플로팅 버튼을 클릭하면 해당 섹션으로 이동하거나 맨 위로 스크롤합니다.
    */
   floatingButtons.forEach(button => { // 플로팅 버튼들 반복문 처리
-    button.addEventListener('click', function() { // 플로팅 버튼 클릭 이벤트 핸들러
+    button.addEventListener('click', function () { // 플로팅 버튼 클릭 이벤트 핸들러
       const sectionId = this.getAttribute('data-section'); // 버튼의 data-section 속성값
-      
+
       if (sectionId) { // 섹션 ID가 있는지 확인
         // 특정 섹션으로 이동
         const targetSection = document.getElementById(sectionId); // 해당 섹션 요소
@@ -1050,7 +1053,7 @@ function initFloatingButtons() { // 플로팅 버튼 기능 초기화 함수
           const shopNavHeight = shopNavElement ? shopNavElement.offsetHeight : 0;      // 네비게이션 높이
           const sectionTop = targetSection.offsetTop;                                    // 섹션 상단 위치
           const scrollPosition = sectionTop - headerHeight - shopNavHeight - (-20);     // 스크롤 위치 계산
-          
+
           // 부드러운 스크롤로 해당 섹션으로 이동
           window.scrollTo({ // 부드러운 스크롤로 해당 위치로 이동
             top: scrollPosition, // 스크롤 위치
@@ -1075,27 +1078,27 @@ function initFloatingButtons() { // 플로팅 버튼 기능 초기화 함수
  */
 function initLikeButtons() { // 좋아요 기능 초기화 함수
   const likeButtons = document.querySelectorAll('.like_btn'); // 모든 좋아요 버튼들
-  
+
   /**
    * 좋아요 버튼 클릭 이벤트 핸들러
    * 클릭 시 좋아요 상태를 토글하고 아이콘을 변경합니다.
    * @param {Event} e - 클릭 이벤트 객체
    */
   likeButtons.forEach(btn => { // 좋아요 버튼들 반복문 처리
-    btn.addEventListener('click', function(e) { // 좋아요 버튼 클릭 이벤트 핸들러
+    btn.addEventListener('click', function (e) { // 좋아요 버튼 클릭 이벤트 핸들러
       e.preventDefault();      // 기본 동작 방지
       e.stopPropagation();    // 이벤트 버블링 방지
-      
+
       const icon = this.querySelector('i');                    // 하트 아이콘 요소
       const isLiked = this.classList.contains('liked');       // 현재 좋아요 상태
       const productId = this.getAttribute('data-product-id'); // 상품 ID
-      
+
       if (isLiked) {
         // 좋아요 취소 처리
         this.classList.remove('liked');                    // liked 클래스 제거
         icon.className = 'fa-regular fa-heart';           // 빈 하트 아이콘으로 변경
         console.log(`상품 ${productId} 좋아요 취소`);
-        
+
         // localStorage에서 제거
         removeFromLikedProducts(productId);
       } else {
@@ -1103,13 +1106,13 @@ function initLikeButtons() { // 좋아요 기능 초기화 함수
         this.classList.add('liked');                       // liked 클래스 추가
         icon.className = 'fa-solid fa-heart';             // 채워진 하트 아이콘으로 변경
         console.log(`상품 ${productId} 좋아요 추가`); // 좋아요 추가 로그
-        
+
         // localStorage에 저장
         addToLikedProducts(productId);
       }
     });
   });
-  
+
   // 페이지 로드 시 저장된 좋아요 상태 복원
   loadLikedProducts(); // 페이지 로드 시 저장된 좋아요 상태 복원
 }
@@ -1142,7 +1145,7 @@ function removeFromLikedProducts(productId) { // 좋아요 상품을 localStorag
  */
 function loadLikedProducts() { // 저장된 좋아요 상태를 복원하는 함수
   const likedProducts = JSON.parse(localStorage.getItem('likedProducts') || '[]'); // 저장된 좋아요 상태
-  
+
   likedProducts.forEach(productId => { // 좋아요 상품들 반복문 처리
     const likeBtn = document.querySelector(`[data-product-id="${productId}"]`); // 좋아요 버튼
     if (likeBtn) { // 좋아요 버튼이 있는지 확인
@@ -1161,7 +1164,7 @@ function loadLikedProducts() { // 저장된 좋아요 상태를 복원하는 함
  * Shop 페이지 초기화
  * DOM이 완전히 로드된 후 Shop 페이지에서만 실행되는 초기화 함수들입니다.
  */
-document.addEventListener('DOMContentLoaded', function() { // DOM이 완전히 로드된 후 실행되는 공통 기능 초기화
+document.addEventListener('DOMContentLoaded', function () { // DOM이 완전히 로드된 후 실행되는 공통 기능 초기화
   // shop.html 페이지에서만 실행
   if (window.location.pathname.includes('shop.html')) { // shop.html 페이지에서만 실행
     console.log('DOM 로드 완료 - Shop 초기화 시작');
@@ -1177,8 +1180,92 @@ document.addEventListener('DOMContentLoaded', function() { // DOM이 완전히 �
  * 화면 크기가 변경될 때 Shop 네비게이션의 위치를 다시 계산합니다.
  * 100ms 지연을 두어 리사이즈 이벤트가 완료된 후 실행됩니다.
  */
-window.addEventListener('resize', function() { // 윈도우 리사이즈 이벤트 핸들러
+window.addEventListener('resize', function () { // 윈도우 리사이즈 이벤트 핸들러
   if (window.location.pathname.includes('shop.html')) { // shop.html 페이지에서만 실행
     setTimeout(setShopNavPosition, 100); // 100ms 후 네비게이션 위치 재설정
   }
 });
+
+// ========================================
+// Event 페이지 전용 탭메뉴 기능
+// ========================================
+
+document.addEventListener('DOMContentLoaded', function () {
+  // event.html 페이지에서만 실행
+  if (window.location.pathname.includes('event.html')) {
+    // 탭메뉴 기능 초기화
+    initEventTabs();
+  }
+});
+
+function initEventTabs() {
+  // 탭 버튼들 선택
+  const tabButtons = document.querySelectorAll('.event_list ul.text li');
+
+  // 각 탭 버튼에 클릭 이벤트 추가
+  tabButtons.forEach((tab, index) => {
+    tab.addEventListener('click', () => {
+      // 모든 탭에서 active 클래스 제거
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+
+      // 클릭된 탭에 active 클래스 추가
+      tab.classList.add('active');
+
+      // 모든 이미지에서 active 클래스 제거
+      const images = document.querySelectorAll('.event_img ul.img li');
+      images.forEach(img => img.classList.remove('active'));
+
+      // 해당하는 이미지에 active 클래스 추가
+      images[index].classList.add('active');
+    });
+  });
+}
+
+
+
+
+
+// ========================================
+// Review 페이지 전용 스와이퍼
+// ========================================
+
+document.addEventListener('DOMContentLoaded', function () {
+  // review.html 페이지에서만 실행
+  if (window.location.pathname.includes('review.html')) {
+    initReviewSwiper();
+  }
+});
+
+function initReviewSwiper() {
+  const reviewSwiper = document.querySelector('.review_sub_swiper');
+
+  if (reviewSwiper && typeof Swiper !== 'undefined') {
+    const swiper = new Swiper('.review_sub_swiper', {
+      loop: true,
+      // autoplay: {
+      //   delay: 4000,
+      //   disableOnInteraction: false,
+      // },
+      // pagination 제거
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      // 반응형 설정
+      breakpoints: {
+        769: {
+          slidesPerView: 2,
+          spaceBetween: 30,
+        },
+        480: {
+          slidesPerView: 1,
+          spaceBetween: 20,
+        },
+        320: {
+          slidesPerView: 1,
+          spaceBetween: 10,
+        },
+      },
+    });
+  }
+}

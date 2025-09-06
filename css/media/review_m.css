@@ -169,7 +169,12 @@
   }
 }
 @media (max-width: 320px) {
-
+  html, body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+  }
+  
   .header{
     height: 50px;
     top: 20px;
@@ -303,6 +308,26 @@
   .cart_checkout {
     padding: 10px;
   }
+  
+  /* Swiper 네비게이션 320px 대응 */
+  .review_sub_swiper .swiper-button-next,
+  .review_sub_swiper .swiper-button-prev {
+    width: 30px;
+    height: 30px;
+  }
+  
+  .review_sub_swiper .swiper-button-next {
+    right: 5px;
+  }
+  
+  .review_sub_swiper .swiper-button-prev {
+    left: 5px;
+  }
+  
+  .review_sub_swiper .swiper-button-next::after,
+  .review_sub_swiper .swiper-button-prev::after {
+    font-size: 14px;
+  }
 }
 
 
@@ -374,9 +399,21 @@
 /* ------------------------------------------------------------------------ */
 
 
-
-
-
+/* 배너 영역 */
+@media (max-width: 1080px){
+  .review_banner{
+    height: 150px;
+  }
+}
+@media (max-width: 480px){
+  .review_banner{
+    height: 100px;
+  }
+  .review_banner_text .text_box{
+    width: 100%;
+    left: 3%;
+  }
+}
 
 
 

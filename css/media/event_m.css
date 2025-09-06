@@ -373,7 +373,120 @@
 /* 이벤트 서브페이지 전용 미디어 ---------------------------------------------- */
 /* ------------------------------------------------------------------------ */
 
-
+@media (max-width: 1080px){
+  .event_banner{
+    height: 150px;
+  }
+  .event_list{
+    width: 48%;
+  }
+  .event_list ul.text li{
+    padding: 5% 3%;
+  }
+  .event_list ul.text li a h3{
+    font-size: clamp(12px, 2vw, 14px);
+    line-height: 1.4;
+  }
+  .event_list ul.text li a strong{
+    font-size: clamp(12px, 2vw, 14px);
+  }
+  .event_list ul.text li a span{
+    font-size: clamp(10px, 2vw, 13px);
+  }
+  .event_contbox{
+    width: 50%;
+  }
+  .event_img ul.img{
+    height: 700px;
+  }
+  .event_img ul.img li img{
+    width: 100%;
+  }
+}
+@media (max-width: 960px){
+  .event_img ul.img{
+    /* height: 580px; */
+    height: clamp(480px, 45vw, 580px);
+  }
+}
+@media (max-width: 768px){
+  .event_cont{
+    flex-direction: column;
+    align-items: center;
+    padding: 10% 0;
+  }
+  .event_list{
+    width: 100%;
+  }  
+  .event_list ul.text{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    border-top: 1px solid var(--text1-color);
+  }
+  .event_list ul.text li{
+    padding: 3%;
+    border-left: 1px solid var(--text1-color);
+  }
+  .event_list ul.text li:first-child{
+    border-left: none;
+  }
+  .event_list ul.text li a{
+    text-align: center;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 5px;
+  }
+  .event_list ul.text li a h3,
+  .event_list ul.text li a strong,
+  .event_list ul.text li a span{
+    width: 100%;
+  }
+  .event_list ul.text li a strong{
+    /* font-size: 18px; */
+    font-size: clamp(14px, 2vw, 18px);
+  }
+  .event_list ul.text li a span{
+    text-align: center;
+  }
+  .event_contbox{
+    width: 100%;
+    padding-top: 5%;
+  }
+  .event_img ul.img{
+    height: 750px;
+  }
+  .event_img ul.img li img{
+    width: 80%;
+  }  
+}
+@media (max-width: 660px){
+  .event_img ul.img{
+    height: 650px;
+  }
+}
+@media (max-width: 480px){
+  .event_banner{
+    height: 100px;
+  }
+  .event_banner_text .text_box{
+    width: 100%;
+    left: 3%;
+  }  
+  .event_img ul.img{
+    height: 570px;
+  }
+  .event_img ul.img li img{
+    width: 100%;
+  }
+}
+@media (max-width: 320px){
+  .event_img ul.img{
+    height: 400px;
+  }
+    
+}
 
 
 
