@@ -371,7 +371,98 @@
 /* ------------------------------------------------------------------------ */
 /* shop 상세 서브페이지 전용 미디어 ---------------------------------------------- */
 /* ------------------------------------------------------------------------ */
+@media (max-width: 1080px){
+  #sub_info{
+    margin-top: 50px;
+  }
+  .sub_info .info_thumb,
+  .sub_info .info_box{
+    height: 500px;
+  }
 
+  .sub_cont{
+    padding: 50px 0;
+  }
+}
+@media (max-width: 960px){
+  .sub_info .info_thumb,
+  .sub_info .info_box{
+    height: 450px;
+  }
+}
+@media (max-width: 768px){
+  .sub_info .info_thumb,
+  .sub_info .info_box{
+    height: 360px;
+  }
+  .info_buy .buy_btns ul li{
+    width: 32%;
+  }
+}
+@media (max-width: 600px){
+  .sub_info{
+    flex-direction: column;
+  }
+  .sub_info .info_thumb{
+    width: 100%;
+    height: auto;
+    margin-bottom: 5%;
+  }
+  .info_thumb .main_thumb{
+    width: 70%;
+  }
+  .info_thumb .sub_thumb{
+    width: 70%;
+  }
+  .sub_info .info_box{
+    width: 100%;
+    height: auto;
+    padding: 0 10%;
+  }
+  .info_box .info_title a{
+    top: 30%;
+    right: 10%;
+  }
+  .sub_cont{
+    padding: 50px 10%;
+  }
+  .sub_cont .cont_title h2{
+    padding: 3% 0;
+  }
+  .cont_info .notice_box{
+    width: 90%;
+    padding: 5% 0;
+  }
+  .cont_info .cont_detail{
+    width: 90%;
+  }
+}
+@media (max-width: 480px){
+  .info_thumb .main_thumb{
+    width: 80%;
+  }
+  .info_thumb .sub_thumb{
+    width: 90%;
+  }
+  .sub_info .info_box{
+    padding: 3% 3% 0 3%;
+  }
+  .info_box .info_title a{
+    top: 35%;
+    right: 3%;
+  }
+  .sub_cont{
+    padding: 50px 0;
+  }
+  .cont_info .notice_box{
+    width: 95%;
+    padding: 8% 0;
+  }
+  .cont_info .cont_detail{
+    width: 95%;
+  }
+}
+@media (max-width: 320px){}
 
 
 

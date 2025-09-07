@@ -18,7 +18,7 @@
   --text2-color: #F9F4F1;
 }
 
-body{
+body,html{
   background-color: var(--bg-color);
   color: var(--text1-color);
   overflow-x: hidden;

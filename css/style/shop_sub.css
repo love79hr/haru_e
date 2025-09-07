@@ -29,6 +29,7 @@
   max-width: 1280px;
   height: inherit;
   position: relative;
+  /* background-color: rgba(255,0,0,0.1); */
 }
 .row{
   padding: 0 clamp(10px, 2vw, 20px);
@@ -879,9 +880,320 @@
 /* ---------이벤트 서브페이지 아이디 영역--------- */
 /* ----------------------------------------- */
 
+#sub_info{
+  width: 100%;
+  margin-top: 5%;
+}
 
+#sub_cont{
+  width: 100%;
+}
 
 /* ----------------------------------------- */
 /* -----이벤트 스토리 서브페이지 클래스 영역------ */
 /* ----------------------------------------- */
 
+/* 큰 메인 썸네일 */
+.sub_info{
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--bg-color);
+  cursor: pointer;
+}
+.sub_info .info_thumb{
+  width: 48%;
+  height: 600px;
+  /* background-color: lightcyan; */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+}
+.info_thumb .main_thumb{
+  width: 85%;
+  height: 85%;
+}
+.info_thumb .main_thumb a{
+  display: inline-block;
+}
+.info_thumb .main_thumb a img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8%;
+}
+
+/* 작은 서브 썸네일 */
+.info_thumb .sub_thumb{
+  width: 85%;
+  height: 60%;
+  padding: 1% 4% 0 4%;
+}
+.info_thumb .sub_thumb ul{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.info_thumb .sub_thumb ul li{
+  width: 18%;
+}
+.info_thumb .sub_thumb ul li a{}
+.info_thumb .sub_thumb ul li a img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10%;
+}
+
+
+
+.sub_info .info_box{
+  width: 50%;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  /* background-color: lightgrey; */
+}
+.info_box .info_title{
+  width: 100%;
+  height: 50%;
+  /* background-color: lightgreen; */
+}
+.info_box .info_title p{
+  margin-bottom: 7%;
+  font-size: clamp(12px, 2vw, 16px);
+}
+.info_box .info_title h3{
+  font-family: 'NanumSquareNeoBold';
+  font-size: clamp(14px, 2vw, 22px);
+  line-height: 160%;
+  color: var(--text1-color);
+  padding-bottom: 3.5%;
+}
+.info_box .info_title strong{
+  font-family: 'NanumSquareNeoBold';
+  font-size: clamp(18px, 3vw, 35px);
+}
+
+.info_box .info_title a{
+  display: block;
+  width: clamp(20px, 3vw, 35px);
+  height: clamp(20px, 3vw, 35px);
+  background-image: url("https://github.com/love79hr/haru_e/blob/main/images/share_icon.png?raw=true");
+  background-size: 80%;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: absolute;
+  top: 18%;
+  right: 0;
+  transition: background-image 0.3s ease;
+}
+.info_box .info_title a:hover{
+  background-image: url("https://github.com/love79hr/haru_e/blob/main/images/share_hover_icon.png?raw=true");
+}
+.info_box .info_title a img{
+  width: 90%;
+  object-fit: cover;
+}
+
+.info_box .info_buy{
+  width: 100%;
+  height: 50%;
+  padding-top: 10%;
+  /* background-color: lightcoral; */
+}
+
+.info_buy .option_box{}
+.info_buy .option_box p{
+  margin-bottom: 2%;
+  font-size: clamp(12px, 2vw, 16px);
+}
+
+/* 드롭다운 스타일 */
+.option_drop {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 3%;
+}
+.option_toggle {
+  width: 100%;
+  padding: 2% 4%;
+  border: 1px solid var(--point-color);
+  background-color: var(--bg-color);
+  text-align: left;
+  cursor: pointer;
+  font-family: 'NanumSquareNeoBold';
+  font-size: clamp(12px, 2vw, 16px);
+  color: var(--text1-color);
+  position: relative;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.option_toggle:hover{
+  background-color: var(--point-color);
+  color: var(--text2-color);
+}
+.option_toggle:after {
+  content: '\f078';
+  font-family: 'Font Awesome 6 Free'; 
+  font-weight: 900;
+  position: absolute;
+  right: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: clamp(16px, 2vw, 18px);
+  transition: transform 0.3s ease;
+}
+.option_drop.active .option_toggle:after {
+  transform: translateY(-50%) rotate(180deg);
+}
+.option1 {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: var(--bg-color);
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(75, 59, 56,0.2);
+  border: 1px solid var(--point-color);
+  border-top: none;
+}
+.option_drop.active .option1 {
+  display: block;
+}
+.option1 li {
+  padding: 2% 4%;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  color: var(--text1-color);
+}
+.option1 li:last-child {
+  border-bottom: none;
+}
+.option1 li:hover {
+  background-color: var(--sub2-color);
+}
+.option1 li.selected {
+  background-color: var(--bg-color);
+  color: var(--point-color);
+}
+
+.info_buy .buy_btns{
+  width: 100%;
+}
+.info_buy .buy_btns ul{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.info_buy .buy_btns ul li{
+  width: 30%;
+  padding: 2% 4%;
+  background-color: var(--bg-color);
+  border: 1px solid var(--point-color);
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+.info_buy .buy_btns ul li:hover{
+  background-color: var(--point-color);
+  color: var(--text2-color);
+}
+.info_buy .buy_btns ul li a{
+  font-family: 'NanumSquareNeoBold';
+  font-size: clamp(12px, 2vw, 16px);
+}
+.info_buy .buy_btns ul li a i{
+  /* color: #DD3636; */
+  padding-right: 1%;
+  font-size: clamp(12px, 2vw, 16px);
+}
+.info_buy .buy_btns ul li a span{
+  font-size: clamp(12px, 2vw, 16px);
+}
+
+
+
+
+/* sub_cont 영역 */
+.sub_cont{
+  width: 100%;
+  height: auto;
+  padding: 100px 0;
+}
+
+.sub_cont .cont_title{
+  width: 100%;
+  height: auto;
+  text-align: center;
+  margin-bottom: 50px;
+}
+.sub_cont .cont_title h2{
+  padding: 1.3% 0;
+  font-family: 'NanumSquareNeoBold';
+  background-color: var(--main-color);
+  color: var(--text2-color);
+  font-size: clamp(16px, 2vw, 18px);
+}
+
+
+.sub_cont .cont_info{
+  width: 100%;
+  height: auto;
+  /* padding-top: 50px; */
+  /* background-color: #fff; */
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  max-height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+/* 웹킷 브라우저용 스크롤바 스타일 */
+.cont_info::-webkit-scrollbar {
+  width: 10px; /* 스크롤바 너비 */
+}
+.cont_info::-webkit-scrollbar-track {
+  background: #fff; /* 스크롤바 트랙 색상 */
+  border-radius: 4px;
+}
+.cont_info::-webkit-scrollbar-thumb {
+  background: var(--point-color); /* 스크롤바 색상 */
+  border-radius: 4px;
+}
+.cont_info::-webkit-scrollbar-thumb:hover {
+  background: var(--main-color); /* 호버시 색상 */
+}
+
+
+.cont_info .notice_box{
+  width: 65%;
+  background-color: var(--sub2-color);
+  text-align: center;
+  padding: 3% 0;
+}
+.cont_info .notice_box p{
+  font-size: clamp(13px, 2vw, 22px);
+  line-height: 160%;
+}
+
+.cont_info .cont_detail{
+  margin-top: 50px;
+  width: 65%;
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 50px 0;
+}
+.cont_info .cont_detail img{
+  width: 90%;
+}

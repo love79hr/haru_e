@@ -1406,3 +1406,67 @@ function navigateToSection(sectionId) {
     window.location.href = 'shop.html' + sectionId;
   }
 }
+
+
+
+// ========================================
+// Shop_sub 페이지 전용 스크립트
+// ========================================
+
+
+// Shop_sub 페이지 드롭다운 기능
+document.addEventListener('DOMContentLoaded', function() {
+  const dropdowns = document.querySelectorAll('.option_drop');
+  
+  dropdowns.forEach(function(dropdown) {
+    const toggle = dropdown.querySelector('.option_toggle');
+    const menu = dropdown.querySelector('.option1');
+    const options = menu.querySelectorAll('li');
+    
+    // 토글 버튼 클릭 이벤트
+    toggle.addEventListener('click', function(e) {
+      e.stopPropagation();
+      
+      // 다른 드롭다운 닫기
+      dropdowns.forEach(function(otherDropdown) {
+        if (otherDropdown !== dropdown) {
+          otherDropdown.classList.remove('active');
+        }
+      });
+      
+      // 현재 드롭다운 토글
+      dropdown.classList.toggle('active');
+    });
+    
+    // 옵션 선택 이벤트
+    options.forEach(function(option) {
+      option.addEventListener('click', function() {
+        // 기존 선택 제거
+        options.forEach(function(opt) {
+          opt.classList.remove('selected');
+        });
+        
+        // 현재 옵션 선택
+        option.classList.add('selected');
+        
+        // 버튼 텍스트 변경
+        const buttonText = toggle.textContent.split('(')[0] + '(' + option.textContent + ')';
+        toggle.textContent = buttonText;
+        
+        // 드롭다운 닫기
+        dropdown.classList.remove('active');
+        
+        // 선택된 값 저장 (필요시 사용)
+        const selectedValue = option.getAttribute('data-value');
+        console.log('선택된 값:', selectedValue, '선택된 텍스트:', option.textContent);
+      });
+    });
+  });
+  
+  // 외부 클릭시 드롭다운 닫기
+  document.addEventListener('click', function() {
+    dropdowns.forEach(function(dropdown) {
+      dropdown.classList.remove('active');
+    });
+  });
+});
