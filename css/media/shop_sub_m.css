@@ -419,7 +419,7 @@
     height: auto;
     padding: 0 10%;
   }
-  .info_box .info_title a{
+  .info_box .info_title a.share_btn{
     top: 30%;
     right: 10%;
   }
@@ -447,7 +447,7 @@
   .sub_info .info_box{
     padding: 3% 3% 0 3%;
   }
-  .info_box .info_title a{
+  .info_box .info_title a.share_btn{
     top: 35%;
     right: 3%;
   }

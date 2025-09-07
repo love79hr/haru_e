@@ -46,3 +46,13 @@ img, video{vertical-align: top; width: 100%; display: block;}
   background-color: var(--point-color);
   color: var(--text2-color);
 }
+
+
+/* 공유아이콘 초기화 */
+.share_btn i,
+.share_btn .fa,
+.share_btn .fas,
+.share_btn .far,
+.share_btn .fab {
+  display: none !important;
+}

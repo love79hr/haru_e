@@ -893,7 +893,7 @@
 /* -----이벤트 스토리 서브페이지 클래스 영역------ */
 /* ----------------------------------------- */
 
-/* 큰 메인 썸네일 */
+
 .sub_info{
   width: 100%;
   height: auto;
@@ -901,8 +901,9 @@
   justify-content: space-between;
   align-items: center;
   background-color: var(--bg-color);
-  cursor: pointer;
+  /* cursor: pointer; */
 }
+/* 왼쪽 썸네일 영역-------------------------*/
 .sub_info .info_thumb{
   width: 48%;
   height: 600px;
@@ -917,13 +918,22 @@
   height: 85%;
 }
 .info_thumb .main_thumb a{
+  width: 100%;
+  width: 100%;
+  border-radius: 8%;
   display: inline-block;
+  overflow: hidden;
 }
 .info_thumb .main_thumb a img{
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 8%;
+  scale: 1;
+  transition: scale 0.3s ease;
+}
+.info_thumb .main_thumb a img:hover{
+  scale: 1.1;
 }
 
 /* 작은 서브 썸네일 */
@@ -936,20 +946,52 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: all 0.3s ease;
 }
 .info_thumb .sub_thumb ul li{
   width: 18%;
+  position: relative;
+  transition: all 0.3s ease;
+  border-radius: 8px;
+  overflow: hidden;
 }
+
+/* 비활성 썸네일 - 어두운 오버레이 */
+.sub_thumb ul li:not(.active)::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(75, 59, 56, 0.7); /* 검은색 60% 오버레이 */
+  transition: background-color 0.3s ease;
+  z-index: 1;
+}
+/* 활성 썸네일 - 오버레이 없음 */
+.sub_thumb ul li.active::after {
+  background-color: transparent; /* 오버레이 제거 */
+}
+/* Hover시 오버레이 밝게 */
+.sub_thumb ul li:not(.active):hover::after {
+  background-color: rgba(75, 59, 56, 0.3); /* 호버시 30%로 밝게 */
+}
+
+
 .info_thumb .sub_thumb ul li a{}
 .info_thumb .sub_thumb ul li a img{
   width: 100%;
   height: 100%;
   object-fit: cover;
   border-radius: 10%;
+  transition: transform 0.3s ease;
 }
 
 
 
+
+
+/* 오른쪽 상품정보 영역-------------------------*/
 .sub_info .info_box{
   width: 50%;
   height: 600px;
@@ -981,7 +1023,7 @@
   font-size: clamp(18px, 3vw, 35px);
 }
 
-.info_box .info_title a{
+.info_box .info_title a.share_btn{
   display: block;
   width: clamp(20px, 3vw, 35px);
   height: clamp(20px, 3vw, 35px);
@@ -994,10 +1036,10 @@
   right: 0;
   transition: background-image 0.3s ease;
 }
-.info_box .info_title a:hover{
+.info_box .info_title a.share_btn:hover{
   background-image: url("https://github.com/love79hr/haru_e/blob/main/images/share_hover_icon.png?raw=true");
 }
-.info_box .info_title a img{
+.info_box .info_title a.share_btn img{
   width: 90%;
   object-fit: cover;
 }
@@ -1073,6 +1115,7 @@
   cursor: pointer;
   transition: background-color 0.2s ease;
   color: var(--text1-color);
+  font-size: clamp(12px, 2vw, 16px);
 }
 .option1 li:last-child {
   border-bottom: none;
@@ -1108,14 +1151,50 @@
 .info_buy .buy_btns ul li a{
   font-family: 'NanumSquareNeoBold';
   font-size: clamp(12px, 2vw, 16px);
+  transition: all 0.3s ease;
 }
 .info_buy .buy_btns ul li a i{
   /* color: #DD3636; */
   padding-right: 1%;
   font-size: clamp(12px, 2vw, 16px);
+  transition: all 0.3s ease;
 }
 .info_buy .buy_btns ul li a span{
   font-size: clamp(12px, 2vw, 16px);
+}
+
+/* 좋아요 버튼 스타일 */
+
+/* 기본 상태 */
+a.like_btn {
+  color: var(--text1-color);
+}
+a.like_btn:hover{
+  color: var(--text2-color);
+}
+a.like_btn i {
+  color: var(--text1-color);
+}
+a.like_btn:hover i{
+  color: var(--text2-color);
+}
+
+/* 활성 상태 */
+a.like_btn.active i {
+  color: #ff4757;
+  transform: scale(1.1);
+}
+
+/* 클릭 시 애니메이션 */
+a.like_btn.clicked i {
+  animation: heartBeat 0.6s ease;
+}
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  25% { transform: scale(1.3); }
+  50% { transform: scale(1.1); }
+  75% { transform: scale(1.2); }
+  100% { transform: scale(1); }
 }
 
 
