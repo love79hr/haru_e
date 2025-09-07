@@ -449,6 +449,16 @@
 }
 
 
-
+ /* 플로팅 썸네일 */
+ @media (max-width: 480px) {
+  .floating-thumbnail {
+    width: 120px;
+    height: 120px;
+  }
+  
+  .floating-thumbnail .thumbnail-overlay span {
+    font-size: 10px;
+  }
+}
 
 

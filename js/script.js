@@ -1190,33 +1190,27 @@ window.addEventListener('resize', function () { // 윈도우 리사이즈 이벤
 // Event 페이지 전용 탭메뉴 기능
 // ========================================
 
-document.addEventListener('DOMContentLoaded', function () {
-  // event.html 페이지에서만 실행
-  if (window.location.pathname.includes('event.html')) {
-    // 탭메뉴 기능 초기화
-    initEventTabs();
+// 페이지 로드 시 이벤트 페이지 탭메뉴 초기화
+document.addEventListener('DOMContentLoaded', function () { // 페이지 로드 시 이벤트 페이지 탭메뉴 초기화
+  if (window.location.pathname.includes('event.html')) { // event.html 페이지에서만 실행
+    initEventTabs(); // 탭메뉴 기능 활성화
   }
 });
 
-function initEventTabs() {
-  // 탭 버튼들 선택
-  const tabButtons = document.querySelectorAll('.event_list ul.text li');
+// 이벤트 탭메뉴 초기화 함수
+function initEventTabs() { // 이벤트 탭메뉴 초기화 함수
+  const tabButtons = document.querySelectorAll('.event_list ul.text li'); // 탭 버튼들
+  const images = document.querySelectorAll('.event_img ul.img li'); // 이미지들
 
   // 각 탭 버튼에 클릭 이벤트 추가
-  tabButtons.forEach((tab, index) => {
-    tab.addEventListener('click', () => {
-      // 모든 탭에서 active 클래스 제거
-      tabButtons.forEach(btn => btn.classList.remove('active'));
+  tabButtons.forEach((tab, index) => { // 각 탭 버튼에 클릭 이벤트 추가
+    tab.addEventListener('click', () => { // 탭 버튼 클릭 이벤트 핸들러
+      
+      tabButtons.forEach(btn => btn.classList.remove('active')); // 모든 탭 비활성화    
+      tab.classList.add('active'); // 클릭된 탭 활성화     
+      images.forEach(img => img.classList.remove('active')); // 모든 이미지 숨김      
+      images[index].classList.add('active'); // 해당 이미지 표시
 
-      // 클릭된 탭에 active 클래스 추가
-      tab.classList.add('active');
-
-      // 모든 이미지에서 active 클래스 제거
-      const images = document.querySelectorAll('.event_img ul.img li');
-      images.forEach(img => img.classList.remove('active'));
-
-      // 해당하는 이미지에 active 클래스 추가
-      images[index].classList.add('active');
     });
   });
 }
@@ -1226,33 +1220,39 @@ function initEventTabs() {
 
 
 // ========================================
-// Review 페이지 전용 스와이퍼
+// Review 페이지 전용 초기화
 // ========================================
 
 document.addEventListener('DOMContentLoaded', function () {
-  // review.html 페이지에서만 실행
   if (window.location.pathname.includes('review.html')) {
     initReviewSwiper();
     initReviewMoreButtons();
   }
 });
 
+// ========================================
+// Review 페이지 전용 스와이퍼
+// ========================================
+
 function initReviewSwiper() {
   const reviewSwiper = document.querySelector('.review_sub_swiper');
 
   if (reviewSwiper && typeof Swiper !== 'undefined') {
     const swiper = new Swiper('.review_sub_swiper', {
-      loop: true,
-      // autoplay: {
-      //   delay: 4000,
-      //   disableOnInteraction: false,
-      // },
-      // pagination 제거
+      slidesPerView: 2,
+      spaceBetween: 20,
+      loop: false,
+      
+      autoplay: {
+        delay: 5000,
+        disableOnInteraction: false,
+      },
+      
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev',
       },
-      // 반응형 설정
+      
       breakpoints: {
         769: {
           slidesPerView: 2,
@@ -1262,70 +1262,147 @@ function initReviewSwiper() {
           slidesPerView: 1,
           spaceBetween: 20,
         },
+        0: {
+          slidesPerView: 1,
+          spaceBetween: 15,
+        },
       },
+      
+      on: {
+        init: function () {
+          // console.log('=== Swiper 초기화 완료 ===');
+          // console.log('총 슬라이드 개수:', this.slides.length);
+          // console.log('현재 활성 슬라이드 인덱스:', this.activeIndex);
+        },
+        slideChange: function () {
+          // console.log('슬라이드 변경됨 - 현재 인덱스:', this.activeIndex);
+          // 슬라이드 변경 시 플로팅 썸네일 제거
+          removeExistingThumbnail();
+        },
+        touchStart: function () {
+          // 터치 시작 시 플로팅 썸네일 제거
+          removeExistingThumbnail();
+        },
+        touchMove: function () {
+          // 터치 이동 시 플로팅 썸네일 제거
+          removeExistingThumbnail();
+        }
+      }
     });
   }
 }
 
 // ========================================
-// Review 페이지 전용 More 버튼 기능
+// Review 페이지 More 버튼 기능
 // ========================================
 
 function initReviewMoreButtons() {
   const moreButtons = document.querySelectorAll('.review_box a.more');
   
-  // 플로팅 썸네일 컨테이너 생성
-  const floatingThumbnail = document.createElement('div');
-  floatingThumbnail.className = 'floating-thumbnail';
-  document.body.appendChild(floatingThumbnail);
-  
-  moreButtons.forEach(btn => {
-    // 마우스 오버 이벤트
-    btn.addEventListener('mouseenter', function(e) {
-      const buttonClass = this.classList[1];
-      const thumbnailMap = {
-        'btn1': 'https://github.com/love79hr/haru_e/blob/main/images/fabric_02.png?raw=true',
-        'btn2': 'https://github.com/love79hr/haru_e/blob/main/images/flower_10.png?raw=true',
-        'btn3': 'https://github.com/love79hr/haru_e/blob/main/images/light_04.png?raw=true',
-        'btn4': 'https://github.com/love79hr/haru_e/blob/main/images/deco_05.png?raw=true'
-      };
-      
-      const thumbnailSrc = thumbnailMap[buttonClass];
-      if (thumbnailSrc) {
-        floatingThumbnail.innerHTML = `<img src="${thumbnailSrc}" alt="상품 썸네일">`;
-        floatingThumbnail.classList.add('show');
-      }
-    });
-    
-    // 마우스 아웃 이벤트
-    btn.addEventListener('mouseleave', function() {
-      floatingThumbnail.classList.remove('show');
-    });
-    
-    // 마우스 움직임 이벤트
-    btn.addEventListener('mousemove', function(e) {
-      floatingThumbnail.style.left = (e.clientX + 20) + 'px';
-      floatingThumbnail.style.top = (e.clientY - 20) + 'px';
-    });
-    
-    // 클릭 이벤트 (기존 기능 유지)
-    btn.addEventListener('click', function(e) {
+  moreButtons.forEach((button, index) => {
+    // 클릭/터치 이벤트 리스너 추가
+    button.addEventListener('click', function(e) {
       e.preventDefault();
-      
-      const sectionMap = {
-        'btn1': 'shop_fabric',
-        'btn2': 'shop_flower',
-        'btn3': 'shop_light',
-        'btn4': 'shop_deco'
-      };
-      
-      const buttonClass = this.classList[1];
-      const targetSection = sectionMap[buttonClass];
-      
-      if (targetSection) {
-        window.location.href = `./shop.html#${targetSection}`;
-        console.log(`${buttonClass} 클릭 - ${targetSection} 섹션으로 이동`);
-      }
+      createFloatingThumbnail(this, index);
     });
   });
+}
+
+// 썸네일 이미지와 섹션 매핑
+const thumbnailMapping = {
+  0: {
+    image: "https://github.com/love79hr/haru_e/blob/main/images/fabric_02.png?raw=true",
+    section: "#shop_fabric"
+  },
+  1: {
+    image: "https://github.com/love79hr/haru_e/blob/main/images/flower_10.png?raw=true", 
+    section: "#shop_flower"
+  },
+  2: {
+    image: "https://github.com/love79hr/haru_e/blob/main/images/light_04.png?raw=true",
+    section: "#shop_light"
+  },
+  3: {
+    image: "https://github.com/love79hr/haru_e/blob/main/images/deco_05.png?raw=true",
+    section: "#shop_deco"
+  },
+  4: {
+    image: "https://github.com/love79hr/haru_e/blob/main/images/fabric_02.png?raw=true",
+    section: "#shop_fabric"
+  },
+  5: {
+    image: "https://github.com/love79hr/haru_e/blob/main/images/flower_10.png?raw=true",
+    section: "#shop_flower"
+  },
+  6: {
+    image: "https://github.com/love79hr/haru_e/blob/main/images/light_04.png?raw=true",
+    section: "#shop_light"
+  },
+  7: {
+    image: "https://github.com/love79hr/haru_e/blob/main/images/deco_05.png?raw=true",
+    section: "#shop_deco"
+  }
+};
+
+function createFloatingThumbnail(button, index) {
+  // 기존 플로팅 썸네일 제거
+  removeExistingThumbnail();
+  
+  // 매핑 정보 가져오기
+  const mapping = thumbnailMapping[index];
+  if (!mapping) return;
+  
+  // 버튼의 위치 계산
+  const buttonRect = button.getBoundingClientRect();
+  const buttonCenterX = buttonRect.left + buttonRect.width / 2;
+  const buttonCenterY = buttonRect.top + buttonRect.height / 2;
+  
+  // 플로팅 썸네일 생성
+  const thumbnail = document.createElement('div');
+  thumbnail.className = 'floating-thumbnail';
+  thumbnail.style.left = (buttonCenterX + 20) + 'px'; // 버튼 오른쪽에 20px 간격
+  thumbnail.style.top = (buttonCenterY - 100) + 'px'; // 버튼 중앙 높이에서 100px 위
+  thumbnail.innerHTML = `
+    <img src="${mapping.image}" alt="product thumbnail">
+    <div class="thumbnail-overlay">
+      <span>제품 보러가기</span>
+    </div>
+  `;
+  
+  // 클릭 이벤트 추가
+  thumbnail.addEventListener('click', function() {
+    navigateToSection(mapping.section);
+  });
+  
+  // DOM에 추가
+  document.body.appendChild(thumbnail);
+  
+  // 애니메이션 효과
+  setTimeout(() => {
+    thumbnail.classList.add('show');
+  }, 10);
+}
+
+function removeExistingThumbnail() {
+  const existingThumbnail = document.querySelector('.floating-thumbnail');
+  if (existingThumbnail) {
+    existingThumbnail.remove();
+  }
+}
+
+function navigateToSection(sectionId) {
+  // 플로팅 썸네일 제거
+  removeExistingThumbnail();
+  
+  // 해당 섹션으로 이동
+  const targetSection = document.querySelector(sectionId);
+  if (targetSection) {
+    targetSection.scrollIntoView({
+      behavior: 'smooth',
+      block: 'start'
+    });
+  } else {
+    // shop.html 페이지로 이동
+    window.location.href = 'shop.html' + sectionId;
+  }
 }

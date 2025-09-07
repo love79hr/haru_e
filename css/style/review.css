@@ -944,13 +944,13 @@
 .review_sub_cont .review_sub_swiper{
   width: 100%;
   height: auto;
-  overflow: hidden;
+  overflow: visible;
   position: relative;
 }
 .review_sub_swiper .swiper-wrapper{
   width: 100%;
   height: auto;
-  overflow: hidden;
+  overflow: visible;
 }
 .review_sub_swiper .swiper-slide{
   height: auto;
@@ -995,21 +995,21 @@
 
 
 .review_box{
-  height: 100%;
+  width: 100%;
+  height: 100%;  
   display: flex;
   flex-direction: column;
   position: relative;
 }
 .review_box .review_img{
-  width: 100%;  
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 .review_box .review_img img{
-  /* transform: scale(1);
-  transition: all 0.3s ease; */
-}
-.review_box .review_img:hover img{
-  /* transform: scale(1.1); */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 .review_box .review_txt{
   width: 100%;
@@ -1076,33 +1076,52 @@ a.more.btn4{
   font-size: clamp(18px, 3vw, 26px);
 }
 
-/* 플로팅 썸네일 컨테이너 */
-.floating-thumbnail {
-  position: fixed;
-  width: clamp(100px, 20vw, 150px);
-  height: clamp(100px, 20vw, 150px);
-  background: var(--bg-color);
-  border-radius: 10px;
-  box-shadow: 0 10px 30px rgba(75, 59, 56,0.5);
-  z-index: 9999;
-  opacity: 0;
-  transform: scale(0.8);
-  transition: all 0.3s ease;
-  pointer-events: none;
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+/* ========================================
+   플로팅 썸네일 스타일 
+   ======================================== */
 
-.floating-thumbnail.show {
-  opacity: 1;
-  transform: scale(1);
-}
-
-.floating-thumbnail img {
-  width: 90%;
-  height: 90%;
-  border-radius: 10px;
-  object-fit: cover;
-}
+   .floating-thumbnail {
+    position: fixed;
+    width: 150px;
+    height: 150px;
+    background: var(--bg-color);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(75, 59, 56, 0.8);
+    cursor: pointer;
+    z-index: 10000;
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+  
+  .floating-thumbnail.show {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .floating-thumbnail img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 15px;
+  }
+  
+  .floating-thumbnail .thumbnail-overlay {
+    font-family: 'NanumSquareNeoBold';
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    color: var(--text2-color);
+    padding: 15px 8px 8px;
+    text-align: center;
+    border-radius: 0 0 15px 15px;
+    background: linear-gradient(transparent, rgba(75, 59, 56, 0.7));
+  }
+  
+  .floating-thumbnail .thumbnail-overlay span {
+    font-size: 12px;
+    font-weight: bold;
+    text-shadow: 0 0 5px rgba(0, 0, 3, 0.8);
+  }
