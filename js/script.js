@@ -1241,10 +1241,10 @@ function initReviewSwiper() {
     const swiper = new Swiper('.review_sub_swiper', {
       slidesPerView: 2,
       spaceBetween: 20,
-      loop: false,
+      loop: true,
       
       autoplay: {
-        delay: 5000,
+        delay: 1000,
         disableOnInteraction: false,
       },
       
