@@ -363,8 +363,13 @@ document.addEventListener('DOMContentLoaded', function () {
  * Swiper 라이브러리가 로드되지 않은 경우 오류를 출력하고 실행을 중단합니다.
  */
 document.addEventListener('DOMContentLoaded', function () { // Swiper 슬라이더 초기화 함수
-  // index.html 페이지에서만 실행 (루트 경로 또는 index.html 포함)
-  if (window.location.pathname === '/' || window.location.pathname.includes('index.html')) {
+  // 메인 페이지에서만 실행 (루트 경로, index.html, 또는 haru_e 경로)
+  const isMainPage = window.location.pathname === '/' || 
+                     window.location.pathname === '/haru_e/' || 
+                     window.location.pathname.includes('index.html') ||
+                     window.location.pathname.endsWith('/haru_e');
+  
+  if (isMainPage) {
     const swiperElement = document.querySelector('.review_swiper'); // Swiper 요소
     if (swiperElement) { // Swiper 요소가 있는 페이지에서만 실행 (리뷰 페이지 등)
       console.log('Swiper 초기화 시작'); // Swiper 초기화 시작
