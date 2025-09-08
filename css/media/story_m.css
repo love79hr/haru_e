@@ -389,6 +389,7 @@
   .brand_story_area {
     padding: 10%;
   }
+
   
   .brand_story_photo_area {
     padding: 0;
@@ -473,6 +474,14 @@
   }
 }
 
+@media (max-width: 480px){
+  .story_content{
+    text-align: center;
+  }
+  .story_title br.m_block{
+    display: block;
+  }
+}
 
 
 

@@ -931,8 +931,12 @@
   font-size: clamp(25px, 4vw, 38px);
   color: var(--text1-color);
   margin-bottom: 4%;
-  line-height: 1;
+  line-height: 160%;
   word-break: keep-all;
+}
+
+.story_title br.m_block{
+  display: none;
 }
 
 .story_text{}

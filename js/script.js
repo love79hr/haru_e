@@ -1371,23 +1371,26 @@ function createFloatingThumbnail(button, index) { // 플로팅 썸네일 생성 
   
   // 플로팅 썸네일 생성
   const thumbnail = document.createElement('div'); // 썸네일 컨테이너 요소 생성
-  thumbnail.className = 'floating-thumbnail'; // CSS 클래스 추가
-  thumbnail.style.left = (buttonCenterX + 20) + 'px'; // 버튼 오른쪽에 20px 간격
-  thumbnail.style.top = (buttonCenterY - 100) + 'px'; // 버튼 중앙 높이에서 100px 위
-  thumbnail.innerHTML = ` // 썸네일 HTML 구조 설정
-    <img src="${mapping.image}" alt="product thumbnail">
-    <div class="thumbnail-overlay">
-      <span>제품 보러가기</span>
-    </div>
-  `;
+
+  // 각 썸네일별로 다른 클래스 설정
+  const thumbClasses = ['fthumb_01', 'fthumb_02', 'fthumb_03', 'fthumb_04'];
+  thumbnail.className = `floating-thumbnail ${thumbClasses[index]}`; // 인덱스에 따른 클래스 설정
+
+  thumbnail.innerHTML = `<img src="${mapping.image}" alt="product thumbnail">
+                         <div class="thumbnail-overlay"><span>제품 보러가기</span></div>`; // 썸네일 HTML 구조 설정
   
   // 클릭 이벤트 추가
   thumbnail.addEventListener('click', function() { // 썸네일 클릭 이벤트
     navigateToSection(mapping.section); // 해당 섹션으로 이동
   });
   
-  // DOM에 추가
-  document.body.appendChild(thumbnail); // 썸네일을 body에 추가
+  // DOM에 추가 - 각 review_box를 기준점으로 설정
+  const reviewBox = button.closest('.review_box');
+  if (reviewBox) {
+    reviewBox.appendChild(thumbnail); // 썸네일을 해당 review_box에 추가
+  } else {
+    document.body.appendChild(thumbnail); // fallback: body에 추가
+  }
   
   // 애니메이션 효과
   setTimeout(() => { // 10ms 후 애니메이션 시작
