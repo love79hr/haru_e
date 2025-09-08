@@ -363,18 +363,29 @@ document.addEventListener('DOMContentLoaded', function () {
  * Swiper 라이브러리가 로드되지 않은 경우 오류를 출력하고 실행을 중단합니다.
  */
 document.addEventListener('DOMContentLoaded', function () { // Swiper 슬라이더 초기화 함수
+  // 디버깅: 현재 경로 확인
+  console.log('=== Swiper 디버깅 시작 ===');
+  console.log('현재 경로:', window.location.pathname);
+  console.log('전체 URL:', window.location.href);
+  
   // 메인 페이지에서만 실행 (루트 경로, haru_e로 시작하는 경로, 또는 index.html 포함)
   const isMainPage = window.location.pathname === '/' || 
-                     window.location.pathname.startsWith('/haru_e') ||
-                     window.location.pathname.includes('index.html');
+                     window.location.pathname.startsWith('/haru_e');
+                    //  window.location.pathname.includes('index.html');
+  
+  console.log('메인 페이지 여부:', isMainPage);
   
   if (isMainPage) {
     const swiperElement = document.querySelector('.review_swiper'); // Swiper 요소
+    console.log('Swiper 요소 찾기 결과:', swiperElement);
+    
     if (swiperElement) { // Swiper 요소가 있는 페이지에서만 실행 (리뷰 페이지 등)
       console.log('Swiper 초기화 시작'); // Swiper 초기화 시작
 
       // Swiper 라이브러리 로드 대기 함수
       function waitForSwiper(callback, maxAttempts = 50, currentAttempt = 0) {
+        console.log('Swiper 라이브러리 확인 중...', typeof Swiper);
+        
         if (typeof Swiper !== 'undefined') {
           console.log('Swiper 라이브러리 로드 완료');
           callback();
@@ -392,7 +403,10 @@ document.addEventListener('DOMContentLoaded', function () { // Swiper 슬라이�
       waitForSwiper(initSwiper);
     } else {
       console.log('Swiper 요소를 찾을 수 없습니다 - 이 페이지에서는 Swiper를 사용하지 않습니다.');
+      console.log('DOM에서 .review_swiper 클래스를 가진 요소가 없습니다.');
     }
+  } else {
+    console.log('메인 페이지가 아닙니다. Swiper 초기화를 건너뜁니다.');
   }
   
   function initSwiper() {
