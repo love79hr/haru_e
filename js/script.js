@@ -369,28 +369,36 @@ document.addEventListener('DOMContentLoaded', function () { // Swiper 슬라이�
     if (swiperElement) { // Swiper 요소가 있는 페이지에서만 실행 (리뷰 페이지 등)
       console.log('Swiper 초기화 시작'); // Swiper 초기화 시작
 
-      // Swiper CDN 라이브러리가 로드되었는지 확인하고 대기
-      if (typeof Swiper === 'undefined') { // Swiper 라이브러리가 로드되지 않았다면 잠시 대기 후 재시도
-        console.log('Swiper 라이브러리 로드 대기 중...');
-        setTimeout(() => {
-          if (typeof Swiper !== 'undefined') {
-            initSwiper();
-          } else {
-            console.error('Swiper 라이브러리가 로드되지 않았습니다');
-          }
-        }, 100);
-        return;
+      // Swiper 라이브러리 로드 대기 함수
+      function waitForSwiper(callback, maxAttempts = 50, currentAttempt = 0) {
+        if (typeof Swiper !== 'undefined') {
+          console.log('Swiper 라이브러리 로드 완료');
+          callback();
+        } else if (currentAttempt < maxAttempts) {
+          console.log(`Swiper 라이브러리 로드 대기 중... (${currentAttempt + 1}/${maxAttempts})`);
+          setTimeout(() => {
+            waitForSwiper(callback, maxAttempts, currentAttempt + 1);
+          }, 100);
+        } else {
+          console.error('Swiper 라이브러리 로드 실패 - 최대 대기 시간 초과');
+        }
       }
-      
-      initSwiper();
+
+      // Swiper 라이브러리 로드 대기 후 초기화
+      waitForSwiper(initSwiper);
     } else {
       console.log('Swiper 요소를 찾을 수 없습니다 - 이 페이지에서는 Swiper를 사용하지 않습니다.');
     }
   }
   
   function initSwiper() {
+    // Swiper 라이브러리 재확인
+    if (typeof Swiper === 'undefined') {
+      console.error('Swiper 라이브러리가 여전히 로드되지 않았습니다');
+      return;
+    }
 
-      try { // Swiper 인스턴스 생성 및 설정
+    try { // Swiper 인스턴스 생성 및 설정
         /**
          * Swiper 인스턴스 생성 및 설정
          * 리뷰 슬라이더의 동작 방식을 정의합니다.
