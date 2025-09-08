@@ -363,34 +363,21 @@ document.addEventListener('DOMContentLoaded', function () {
  * Swiper 라이브러리가 로드되지 않은 경우 오류를 출력하고 실행을 중단합니다.
  */
 document.addEventListener('DOMContentLoaded', function () { // Swiper 슬라이더 초기화 함수
-  // 디버깅: 현재 경로 확인
-  console.log('=== Swiper 디버깅 시작 ===');
-  console.log('현재 경로:', window.location.pathname);
-  console.log('전체 URL:', window.location.href);
-  
   // 메인 페이지에서만 실행 (루트 경로, haru_e로 시작하는 경로, 또는 index.html 포함)
   const isMainPage = window.location.pathname === '/' || 
                      window.location.pathname.startsWith('/haru_e');
                     //  window.location.pathname.includes('index.html');
   
-  console.log('메인 페이지 여부:', isMainPage);
-  
   if (isMainPage) {
     const swiperElement = document.querySelector('.review_swiper'); // Swiper 요소
-    console.log('Swiper 요소 찾기 결과:', swiperElement);
     
     if (swiperElement) { // Swiper 요소가 있는 페이지에서만 실행 (리뷰 페이지 등)
-      console.log('Swiper 초기화 시작'); // Swiper 초기화 시작
 
       // Swiper 라이브러리 로드 대기 함수
       function waitForSwiper(callback, maxAttempts = 50, currentAttempt = 0) {
-        console.log('Swiper 라이브러리 확인 중...', typeof Swiper);
-        
         if (typeof Swiper !== 'undefined') {
-          console.log('Swiper 라이브러리 로드 완료');
           callback();
         } else if (currentAttempt < maxAttempts) {
-          console.log(`Swiper 라이브러리 로드 대기 중... (${currentAttempt + 1}/${maxAttempts})`);
           setTimeout(() => {
             waitForSwiper(callback, maxAttempts, currentAttempt + 1);
           }, 100);
@@ -401,12 +388,7 @@ document.addEventListener('DOMContentLoaded', function () { // Swiper 슬라이�
 
       // Swiper 라이브러리 로드 대기 후 초기화
       waitForSwiper(initSwiper);
-    } else {
-      console.log('Swiper 요소를 찾을 수 없습니다 - 이 페이지에서는 Swiper를 사용하지 않습니다.');
-      console.log('DOM에서 .review_swiper 클래스를 가진 요소가 없습니다.');
     }
-  } else {
-    console.log('메인 페이지가 아닙니다. Swiper 초기화를 건너뜁니다.');
   }
   
   function initSwiper() {
@@ -450,16 +432,11 @@ document.addEventListener('DOMContentLoaded', function () { // Swiper 슬라이�
           },
         });
 
-        console.log('Swiper 초기화 완료');
-
         /**
          * Swiper 인스턴스 생성 확인 및 페이지네이션 표시
          * 초기화가 성공적으로 완료되었는지 확인하고 페이지네이션을 표시합니다.
          */
         if (reviewSwiper) { // Swiper 인스턴스 생성되었는지 확인
-          console.log('Swiper 인스턴스 생성됨'); // Swiper 인스턴스 생성됨
-          console.log('페이지네이션 요소:', reviewSwiper.pagination.el); // 페이지네이션 요소
-
           /**
            * 페이지네이션 표시 처리
            * 300ms 지연 후 페이지네이션을 시각적으로 표시합니다.
@@ -471,7 +448,6 @@ document.addEventListener('DOMContentLoaded', function () { // Swiper 슬라이�
               pagination.style.display = 'block'; // 페이지네이션 표시
               pagination.style.opacity = '1'; // 페이지네이션 표시
               pagination.style.visibility = 'visible'; // 페이지네이션 표시
-              console.log('페이지네이션 스타일 적용됨');
             }
           }, 300);
         }
