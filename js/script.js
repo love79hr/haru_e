@@ -1299,13 +1299,19 @@ function initReviewSwiper() { // Review 페이지 스와이퍼 초기화 함수
           // 슬라이드 변경 시 플로팅 썸네일 제거
           removeExistingThumbnail(); // 기존 플로팅 썸네일 제거
         },
-        touchStart: function () { // 터치 시작 시
-          // 터치 시작 시 플로팅 썸네일 제거
-          removeExistingThumbnail(); // 기존 플로팅 썸네일 제거
+        touchStart: function (swiper, event) { // 터치 시작 시
+          // 플로팅 썸네일 클릭이 아닌 경우에만 제거
+          const thumbnail = document.querySelector('.floating-thumbnail');
+          if (thumbnail && !thumbnail.contains(event.target)) {
+            removeExistingThumbnail(); // 기존 플로팅 썸네일 제거
+          }
         },
-        touchMove: function () { // 터치 이동 시
-          // 터치 이동 시 플로팅 썸네일 제거
-          removeExistingThumbnail(); // 기존 플로팅 썸네일 제거
+        touchMove: function (swiper, event) { // 터치 이동 시
+          // 실제 스와이프 동작이 있을 때만 썸네일 제거
+          const thumbnail = document.querySelector('.floating-thumbnail');
+          if (thumbnail && !thumbnail.contains(event.target)) {
+            removeExistingThumbnail(); // 기존 플로팅 썸네일 제거
+          }
         }
       }
     });
@@ -1370,7 +1376,9 @@ function createFloatingThumbnail(button, index) { // 플로팅 썸네일 생성 
   
   // 매핑 정보 가져오기
   const mapping = thumbnailMapping[index]; // 해당 인덱스의 매핑 정보
-  if (!mapping) return; // 매핑 정보가 없으면 함수 종료
+  if (!mapping) {
+    return; // 매핑 정보가 없으면 함수 종료
+  }
   
   // 버튼의 위치 계산
   const buttonRect = button.getBoundingClientRect(); // 버튼의 위치와 크기 정보
@@ -1388,7 +1396,16 @@ function createFloatingThumbnail(button, index) { // 플로팅 썸네일 생성 
                          <div class="thumbnail-overlay"><span>제품 보러가기</span></div>`; // 썸네일 HTML 구조 설정
   
   // 클릭 이벤트 추가
-  thumbnail.addEventListener('click', function() { // 썸네일 클릭 이벤트
+  thumbnail.addEventListener('click', function(e) { // 썸네일 클릭 이벤트
+    e.preventDefault(); // 기본 동작 방지
+    e.stopPropagation(); // 이벤트 버블링 방지
+    navigateToSection(mapping.section); // 해당 섹션으로 이동
+  });
+  
+  // 터치 이벤트도 추가 (모바일 대응)
+  thumbnail.addEventListener('touchend', function(e) { // 터치 종료 이벤트
+    e.preventDefault(); // 기본 동작 방지
+    e.stopPropagation(); // 이벤트 버블링 방지
     navigateToSection(mapping.section); // 해당 섹션으로 이동
   });
   
@@ -1419,14 +1436,27 @@ function navigateToSection(sectionId) { // 섹션으로 이동하는 함수
   
   // 해당 섹션으로 이동
   const targetSection = document.querySelector(sectionId); // 대상 섹션 요소 찾기
+  
   if (targetSection) { // 섹션이 현재 페이지에 있으면
     targetSection.scrollIntoView({ // 부드러운 스크롤로 섹션으로 이동
       behavior: 'smooth', // 부드러운 스크롤
       block: 'start' // 섹션 상단에 맞춤
     });
   } else { // 섹션이 현재 페이지에 없으면
-    // shop.html 페이지로 이동
-    window.location.href = 'shop.html' + sectionId; // shop.html 페이지로 이동
+    // shop.html 페이지로 이동 (섹션 ID와 함께)
+    const targetUrl = 'shop.html' + sectionId; // 이동할 URL 생성
+    
+    // 페이지 이동 실행
+    try {
+      window.location.href = targetUrl; // shop.html 페이지로 이동
+    } catch (error) {
+      // 백업 방법들
+      setTimeout(() => {
+        if (window.location.href.includes('review.html')) {
+          window.location.assign(targetUrl);
+        }
+      }, 100);
+    }
   }
 }
 
