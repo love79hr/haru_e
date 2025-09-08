@@ -1258,7 +1258,7 @@ function initReviewSwiper() { // Review 페이지 스와이퍼 초기화 함수
       loop: true, // 무한 루프 활성화
       
       autoplay: { // 자동 재생 설정
-        delay: 5000, // 5초마다 슬라이드 변경
+        delay: 10000, // 5초마다 슬라이드 변경
         disableOnInteraction: false, // 사용자 상호작용 후에도 자동재생 유지
       },
       
