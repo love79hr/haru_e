@@ -1639,12 +1639,10 @@ document.addEventListener('DOMContentLoaded', function() { // 좋아요 버튼 �
       // 좋아요 취소
       this.classList.remove('active'); // active 클래스 제거
       likeIcon.className = 'fa-regular fa-heart'; // 빈 하트 아이콘으로 변경
-      likeText.textContent = '좋아요'; // 텍스트를 '좋아요'로 변경
     } else { // 좋아요가 비활성화된 상태면
       // 좋아요 추가
       this.classList.add('active'); // active 클래스 추가
       likeIcon.className = 'fa-solid fa-heart'; // 채워진 하트 아이콘으로 변경
-      likeText.textContent = '좋아요 취소'; // 텍스트를 '좋아요 취소'로 변경
     }
     
     // 클릭 애니메이션
@@ -1658,7 +1656,7 @@ document.addEventListener('DOMContentLoaded', function() { // 좋아요 버튼 �
 
 // 공유 버튼 활성화
 document.addEventListener('DOMContentLoaded', function() { // 공유 버튼 초기화
-  const shareBtn = document.querySelector('.info_title a.share_btn'); // 공유 버튼 요소
+  const shareBtn = document.querySelector('.info_box .info_title a.share_btn'); // 공유 버튼 요소
   
   if (shareBtn) { // 공유 버튼이 있으면
     shareBtn.addEventListener('click', function(e) { // 공유 버튼 클릭 이벤트
